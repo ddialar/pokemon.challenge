@@ -36,7 +36,7 @@
     "openapi-spec": "node ./dist/openapi-spec",
     "rebuild": "npm run clean && npm run build",
     "prestart": "npm run rebuild",
-    "start": "DOTENV_CONFIG_PATH=.env.development node -r dotenv/config -r source-map-support/register .",
+    "start": "DOTENV_CONFIG_PATH=./env/.env.development node -r dotenv/config -r source-map-support/register .",
     "clean": "lb-clean dist *.tsbuildinfo .eslintcache",
     "deps": "npm run deps:audit && npm run deps:sec-scan",
     "deps:audit": "npm audit && npm outdated",

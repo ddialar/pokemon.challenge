@@ -1,0 +1,86 @@
+{
+  "name": "pokemon.challenge",
+  "version": "1.0.0",
+  "description": "Pokemon Challenge",
+  "license": "See licence file",
+  "keywords": [
+    "TypeScript",
+    "loopback-application",
+    "loopback",
+    "nodejs",
+    "docker",
+    "mongodb"
+  ],
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "engines": {
+    "node": ">=10.16"
+  },
+  "scripts": {
+    "build": "lb-tsc",
+    "build:watch": "lb-tsc --watch",
+    "lint": "npm run eslint && npm run prettier:check",
+    "lint:fix": "npm run eslint:fix && npm run prettier:fix",
+    "lint:lockfile": "lockfile-lint --path package-lock.json --type npm --validate-https --allowed-hotst npm",
+    "prettier:cli": "lb-prettier \"**/*.ts\" \"**/*.js\"",
+    "prettier:check": "npm run prettier:cli -- -l",
+    "prettier:fix": "npm run prettier:cli -- --write",
+    "eslint": "lb-eslint --report-unused-disable-directives .",
+    "eslint:fix": "npm run eslint -- --fix",
+    "pretest": "npm run rebuild",
+    "test": "lb-mocha --allow-console-logs \"dist/__tests__\"",
+    "posttest": "npm run lint",
+    "test:dev": "lb-mocha --allow-console-logs dist/__tests__/**/*.js && npm run posttest",
+    "premigrate": "npm run build",
+    "preopenapi-spec": "npm run build",
+    "openapi-spec": "node ./dist/openapi-spec",
+    "rebuild": "npm run clean && npm run build",
+    "prestart": "npm run rebuild",
+    "start": "DOTENV_CONFIG_PATH=.env.development node -r dotenv/config -r source-map-support/register .",
+    "clean": "lb-clean dist *.tsbuildinfo .eslintcache",
+    "deps": "npm run deps:audit && npm run deps:sec-scan",
+    "deps:audit": "npm audit && npm outdated",
+    "deps:sec-scan": "npm run lint:lockfile",
+    "dev_infra:up": "docker-compose --env-file docker/dev/.docker.env -f docker/docker-compose.yml up -d",
+    "dev_infra:down": "docker-compose --env-file docker/dev/.docker.env -f docker/docker-compose.yml down -v",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ddialar/pokemon.challenge.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ddialar/pokemon.challenge/issues"
+  },
+  "author": "Dailos Rafael Díaz Lara <ddialar@gmail.com>",
+  "files": [
+    "README.md",
+    "dist",
+    "src",
+    "!*/__tests__"
+  ],
+  "lint-staged": {
+    "*.ts": "npm run lint:fix"
+  },
+  "dependencies": {
+    "@loopback/boot": "^3.2.1",
+    "@loopback/core": "^2.14.1",
+    "@loopback/repository": "^3.4.1",
+    "@loopback/rest": "^9.1.3",
+    "@loopback/rest-explorer": "^3.1.0",
+    "@loopback/service-proxy": "^3.0.7",
+    "loopback-connector-mongodb": "^5.5.0",
+    "tslib": "^2.0.0"
+  },
+  "devDependencies": {
+    "@loopback/build": "^6.2.9",
+    "@loopback/eslint-config": "^10.0.5",
+    "@loopback/testlab": "^3.2.12",
+    "@types/node": "^10.17.51",
+    "dotenv": "^8.2.0",
+    "eslint": "^7.18.0",
+    "husky": "^5.1.3",
+    "source-map-support": "^0.5.19",
+    "typescript": "~4.1.3"
+  }
+}

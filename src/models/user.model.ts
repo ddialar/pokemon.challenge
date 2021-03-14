@@ -9,7 +9,7 @@ export class User extends Entity {
     required: true,
     hidden: true,
   })
-  id: string;
+  id?: string;
 
   @property({
     type: 'string',
@@ -20,31 +20,31 @@ export class User extends Entity {
   @property({
     type: 'string',
   })
-  surname?: string;
+  surname: string;
 
   @property({
     type: 'string',
   })
-  username?: string;
-
-  @property({
-    type: 'string',
-    hidden: true,
-  })
-  password?: string;
+  username: string;
 
   @property({
     type: 'string',
     hidden: true,
   })
-  token?: string;
+  password: string;
+
+  @property({
+    type: 'string',
+    hidden: true,
+  })
+  token: string;
 
   @property({
     type: 'array',
     itemType: 'string',
     hidden: true,
   })
-  favoritePokemons?: string[];
+  favoritePokemons: string[];
 
   @property({
     type: 'date',

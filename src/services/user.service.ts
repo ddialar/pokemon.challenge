@@ -1,5 +1,5 @@
 import {UserService} from '@loopback/authentication';
-import {BindingScope, injectable} from '@loopback/core';
+import {BindingScope, injectable, service} from '@loopback/core';
 import {repository} from '@loopback/repository';
 import {HttpErrors} from '@loopback/rest';
 import {securityId, UserProfile} from '@loopback/security';
@@ -7,11 +7,15 @@ import {User} from '../models';
 import {UserRepository} from '../repositories';
 import {LoginInputParams} from '../types';
 import {HashService} from './hash.service';
+import {PokemonService} from './pokemon.service';
 
 @injectable({scope: BindingScope.TRANSIENT})
 export class MyUserService implements UserService<User, LoginInputParams> {
   constructor(
-    @repository(UserRepository) public userRepository: UserRepository,
+    @repository(UserRepository)
+    public userRepository: UserRepository,
+    @service(PokemonService)
+    public pokemonService: PokemonService,
   ) {}
 
   async verifyCredentials({
@@ -48,5 +52,71 @@ export class MyUserService implements UserService<User, LoginInputParams> {
       surname,
       username,
     };
+  }
+
+  async markPokemonFavorite(
+    pokemonId: string,
+    {id}: User,
+  ): Promise<{message: string}> {
+    const presistedPokemon = await this.pokemonService.getById(pokemonId);
+    if (!presistedPokemon) {
+      throw new HttpErrors.NotFound(
+        `Pokemon with id '${pokemonId}' doesn't exist`,
+      );
+    }
+
+    try {
+      const {favoritePokemons} = await this.userRepository.findById(id);
+
+      if (!favoritePokemons.includes(pokemonId)) {
+        await this.userRepository.updateById(id, {
+          favoritePokemons: [...favoritePokemons, pokemonId],
+        });
+        return {
+          message: 'The selected pokemon was marked as favorite successfully',
+        };
+      }
+
+      return {message: 'The selected pokemon is already marked as favorite'};
+    } catch ({message}) {
+      throw new HttpErrors.InternalServerError(
+        `Marking pokemon as favorite by user '${id}': ${message}`,
+      );
+    }
+  }
+
+  async unmarkPokemonFavorite(
+    pokemonId: string,
+    {id}: User,
+  ): Promise<{message: string}> {
+    const presistedPokemon = await this.pokemonService.getById(pokemonId);
+    if (!presistedPokemon) {
+      throw new HttpErrors.NotFound(
+        `Pokemon with id '${pokemonId}' doesn't exist`,
+      );
+    }
+
+    try {
+      const {favoritePokemons} = await this.userRepository.findById(id);
+
+      const pokemonIndex = favoritePokemons.indexOf(pokemonId);
+
+      if (pokemonIndex >= 0) {
+        const updatedFavoritePokemons = [...favoritePokemons];
+        updatedFavoritePokemons.splice(pokemonIndex, 1);
+        await this.userRepository.updateById(id, {
+          favoritePokemons: updatedFavoritePokemons,
+        });
+        return {
+          message: 'The selected pokemon was unmarked as favorite successfully',
+        };
+      }
+
+      return {message: 'The selected pokemon is already unmarked as favorite'};
+    } catch ({message}) {
+      throw new HttpErrors.InternalServerError(
+        `Unmarking pokemon as favorite by user '${id}': ${message}`,
+      );
+    }
   }
 }

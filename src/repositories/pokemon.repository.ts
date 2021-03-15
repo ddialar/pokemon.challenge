@@ -1,5 +1,5 @@
 import {inject} from '@loopback/core';
-import {DefaultCrudRepository} from '@loopback/repository';
+import {DefaultCrudRepository, Filter} from '@loopback/repository';
 import {MongoDataSource} from '../datasources';
 import {Pokemon, PokemonRelations} from '../models';
 
@@ -19,22 +19,7 @@ export class PokemonRepository extends DefaultCrudRepository<
     super(Pokemon, dataSource);
   }
 
-  async findFiltered({
-    name,
-    type,
-    skip,
-    limit,
-  }: PokemonRequestFilter): Promise<Pokemon[]> {
-    const where = {
-      name: name && {regexp: new RegExp(name, 'i')},
-      types: type ? {inq: [[type]]} : undefined,
-    };
-    const filter = {
-      where,
-      skip,
-      limit,
-      order: ['id ASC'],
-    };
+  async findFiltered(filter: Filter<Pokemon>): Promise<Pokemon[]> {
     return this.find(filter);
   }
 }

@@ -3,9 +3,9 @@ import {BindingScope, injectable} from '@loopback/core';
 import {repository} from '@loopback/repository';
 import {HttpErrors} from '@loopback/rest';
 import {securityId, UserProfile} from '@loopback/security';
-import {LoginInputParams} from '../controllers';
 import {User} from '../models';
 import {UserRepository} from '../repositories';
+import {LoginInputParams} from '../types';
 import {HashService} from './hash.service';
 
 @injectable({scope: BindingScope.TRANSIENT})

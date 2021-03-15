@@ -2,7 +2,7 @@ import {ResponseModelOrSpec} from '@loopback/openapi-v3';
 import {RequestBodyObject} from 'openapi3-ts';
 
 export const LOGIN_RESPONSE_SCHEMA: ResponseModelOrSpec = {
-  description: 'User model instance',
+  description: 'Authenticated user data',
   content: {
     'application/json': {
       schema: {
@@ -27,12 +27,13 @@ export const LOGIN_REQUEST_BODY_SCHEMA: Partial<RequestBodyObject> = {
         required: ['username', 'password'],
         properties: {
           username: {
-            type: 'string' as const,
+            type: 'string',
+            format: 'email',
             example: 'jane@doe.com',
           },
           password: {
-            type: 'string' as const,
-            example: '123456',
+            type: 'string',
+            example: '"123456"',
           },
         },
       },

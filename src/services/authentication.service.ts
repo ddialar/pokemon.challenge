@@ -1,6 +1,6 @@
 import {TokenService, UserService} from '@loopback/authentication';
 import {BindingScope, injectable, service} from '@loopback/core';
-import {LoginInputParams} from '../controllers';
+import {LoginInputParams} from '../types';
 import {User} from './../models/user.model';
 import {JwtService} from './jwt.service';
 import {MyUserService} from './user.service';

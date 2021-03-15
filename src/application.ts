@@ -1,7 +1,15 @@
+import {
+  AuthenticationComponent,
+  registerAuthenticationStrategy,
+} from '@loopback/authentication';
 import {BootMixin} from '@loopback/boot';
-import {ApplicationConfig} from '@loopback/core';
+import {
+  ApplicationConfig,
+  BindingKey,
+  createBindingFromClass,
+} from '@loopback/core';
 import {RepositoryMixin} from '@loopback/repository';
-import {RestApplication} from '@loopback/rest';
+import {OpenApiSpec, RestApplication} from '@loopback/rest';
 import {
   RestExplorerBindings,
   RestExplorerComponent,
@@ -9,14 +17,27 @@ import {
 import {ServiceMixin} from '@loopback/service-proxy';
 import path from 'path';
 import {MySequence} from './sequence';
+import {JWTAuthenticationStrategy} from './strategies';
+import {SECURITY_SCHEME_SPEC, SECURITY_SPEC} from './utils/security-spec';
 
 export {ApplicationConfig};
+
+interface PackageInfo {
+  name: string;
+  version: string;
+  description: string;
+}
+
+const PackageKey = BindingKey.create<PackageInfo>('application.package');
+const pkg: PackageInfo = require('../package.json');
 
 export class Main extends BootMixin(
   ServiceMixin(RepositoryMixin(RestApplication)),
 ) {
   constructor(options: ApplicationConfig = {}) {
     super(options);
+
+    this.setUpBindings();
 
     this.sequence(MySequence);
 
@@ -27,6 +48,11 @@ export class Main extends BootMixin(
     });
     this.component(RestExplorerComponent);
 
+    this.component(AuthenticationComponent);
+
+    this.add(createBindingFromClass(JWTAuthenticationStrategy));
+    registerAuthenticationStrategy(this, JWTAuthenticationStrategy);
+
     this.projectRoot = __dirname;
     this.bootOptions = {
       controllers: {
@@ -35,5 +61,19 @@ export class Main extends BootMixin(
         nested: true,
       },
     };
+
+    const spec: OpenApiSpec = {
+      openapi: '3.0.0',
+      info: {title: pkg.name, version: pkg.version},
+      paths: {},
+      components: {securitySchemes: SECURITY_SCHEME_SPEC},
+      servers: [{url: '/api'}],
+      security: SECURITY_SPEC,
+    };
+    this.api(spec);
+  }
+
+  private setUpBindings() {
+    this.bind(PackageKey).to(pkg);
   }
 }

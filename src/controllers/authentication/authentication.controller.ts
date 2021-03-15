@@ -1,11 +1,11 @@
 import {service} from '@loopback/core';
 import {post, requestBody, response} from '@loopback/rest';
 import {AuthenticatedUser, AuthenticationService} from '../../services';
+import {LoginInputParams} from '../../types';
 import {
   LOGIN_REQUEST_BODY_SCHEMA,
   LOGIN_RESPONSE_SCHEMA,
 } from './authentication.schemas';
-import {LoginInputParams} from './authentication.types';
 
 export class AuthenticationController {
   constructor(

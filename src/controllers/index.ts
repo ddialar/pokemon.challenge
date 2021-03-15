@@ -1,3 +1,3 @@
 export * from './authentication';
-export * from './pokemon.controller';
-export * from './user.controller';
+export * from './pokemon';
+export * from './user';

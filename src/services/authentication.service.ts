@@ -1,9 +1,9 @@
-import {/* inject, */ BindingScope, injectable} from '@loopback/core';
-import {repository} from '@loopback/repository';
-import {HttpErrors} from '@loopback/rest';
-import {UserRepository} from '../repositories';
-import {HashService} from './hash.service';
-import {TokenService} from './token.service';
+import {TokenService, UserService} from '@loopback/authentication';
+import {BindingScope, injectable, service} from '@loopback/core';
+import {LoginInputParams} from '../controllers';
+import {User} from './../models/user.model';
+import {JwtService} from './jwt.service';
+import {MyUserService} from './user.service';
 
 export interface AuthenticatedUser {
   token: string;
@@ -12,42 +12,19 @@ export interface AuthenticatedUser {
 @injectable({scope: BindingScope.TRANSIENT})
 export class AuthenticationService {
   constructor(
-    @repository(UserRepository)
-    private userRepository: UserRepository,
+    @service(JwtService)
+    public jwtService: TokenService,
+    @service(MyUserService)
+    public userService: UserService<User, LoginInputParams>,
   ) {}
 
   public async login(
     username: string,
     password: string,
   ): Promise<AuthenticatedUser> {
-    const persistedUser = await this.userRepository.findOne({
-      where: {username},
-    });
-    if (!persistedUser) {
-      throw new HttpErrors.NotFound(
-        `User with username '${username}' doesn't exist in login process.`,
-      );
-    }
-    const {id: userId, password: hashedPassword, name, surname} = persistedUser;
-
-    const validPassword = await HashService.checkPassword(
-      password,
-      hashedPassword,
-    );
-    if (!validPassword) {
-      throw new HttpErrors.Unauthorized(
-        `Password missmatches for username '${username}' in login process.`,
-      );
-    }
-
-    const token = TokenService.encodeJwt({
-      id: userId!,
-      username,
-      name,
-      surname,
-    });
-    await this.userRepository.updateById(userId!, {token});
-
+    const user = await this.userService.verifyCredentials({username, password});
+    const userProfile = this.userService.convertToUserProfile(user);
+    const token = await this.jwtService.generateToken(userProfile);
     return {token};
   }
 }

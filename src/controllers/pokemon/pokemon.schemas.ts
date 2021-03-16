@@ -55,6 +55,16 @@ export const POKEMON_ID_SCHEMA: ParameterObject = {
   },
 };
 
+export const POKEMON_NAME_SCHEMA: ParameterObject = {
+  name: 'name',
+  in: 'path',
+  required: true,
+  schema: {
+    type: 'string',
+    pattern: process.env.POKEMON_NAME_PATTERN,
+  },
+};
+
 export const POKEMON_FILTER_NAME_SCHEMA: ParameterObject = {
   name: 'name',
   in: 'query',

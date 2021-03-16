@@ -1,13 +1,5 @@
-import {
-  AuthenticationComponent,
-  registerAuthenticationStrategy,
-} from '@loopback/authentication';
 import {BootMixin} from '@loopback/boot';
-import {
-  ApplicationConfig,
-  BindingKey,
-  createBindingFromClass,
-} from '@loopback/core';
+import {ApplicationConfig, BindingKey} from '@loopback/core';
 import {RepositoryMixin} from '@loopback/repository';
 import {OpenApiSpec, RestApplication} from '@loopback/rest';
 import {
@@ -17,8 +9,6 @@ import {
 import {ServiceMixin} from '@loopback/service-proxy';
 import path from 'path';
 import {MySequence} from './sequence';
-import {JWTAuthenticationStrategy} from './strategies';
-import {SECURITY_SCHEME_SPEC, SECURITY_SPEC} from './utils/security-spec';
 
 export {ApplicationConfig};
 
@@ -48,11 +38,6 @@ export class Main extends BootMixin(
     });
     this.component(RestExplorerComponent);
 
-    this.component(AuthenticationComponent);
-
-    this.add(createBindingFromClass(JWTAuthenticationStrategy));
-    registerAuthenticationStrategy(this, JWTAuthenticationStrategy);
-
     this.projectRoot = __dirname;
     this.bootOptions = {
       controllers: {
@@ -66,9 +51,7 @@ export class Main extends BootMixin(
       openapi: '3.0.0',
       info: {title: pkg.name, version: pkg.version},
       paths: {},
-      components: {securitySchemes: SECURITY_SCHEME_SPEC},
       servers: [{url: '/api'}],
-      security: SECURITY_SPEC,
     };
     this.api(spec);
   }

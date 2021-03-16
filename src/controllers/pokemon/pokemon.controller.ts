@@ -11,9 +11,10 @@ import {
   POKEMON_FILTER_TYPE_SCHEMA,
   POKEMON_ID_SCHEMA,
   POKEMON_MARKED_FAVORITE_SUCCESS_SCHEMA,
+  POKEMON_NAME_SCHEMA,
   POKEMON_TYPES_ARRAY_RESPONSE_SCHEMA,
   POKEMON_UNMARKED_FAVORITE_SUCCESS_SCHEMA,
-  SINGLE_POKEMON_RESPONSE_SCHEMA,
+  SINGLE_POKEMON_RESPONSE_SCHEMA
 } from './pokemon.schemas';
 
 export class PokemonController {
@@ -36,13 +37,13 @@ export class PokemonController {
 
   @get('/pokemons/{id}')
   @response(200, SINGLE_POKEMON_RESPONSE_SCHEMA)
-  async findById(@param.path.string('id') id: string): Promise<Pokemon> {
+  async findById(@param(POKEMON_ID_SCHEMA) id: string): Promise<Pokemon> {
     return this.pokemonService.getById(id);
   }
 
   @get('/pokemons/name/{name}')
   @response(200, SINGLE_POKEMON_RESPONSE_SCHEMA)
-  async findByName(@param.path.string('name') name: string): Promise<Pokemon> {
+  async findByName(@param(POKEMON_NAME_SCHEMA) name: string): Promise<Pokemon> {
     return this.pokemonService.getByName(name);
   }
 

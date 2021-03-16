@@ -13,6 +13,16 @@ export class PokemonRepository extends DefaultCrudRepository<
     super(Pokemon, dataSource);
   }
 
+  async findByPokemonId(pokemonId: string): Promise<Pokemon | null> {
+    const filter = {
+      where: {
+        id: pokemonId
+      },
+    };
+
+    return this.findOne(filter);
+  }
+
   async findByName(name: string): Promise<Pokemon | null> {
     const nameRegex = new RegExp(name, 'i');
     const filter = {

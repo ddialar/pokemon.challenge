@@ -8,6 +8,7 @@ import {UserRepository} from '../repositories';
 import {LoginInputParams} from '../types';
 import {HashService} from './hash.service';
 import {PokemonService} from './pokemon.service';
+import {ValidatorService} from './validator.service';
 
 @injectable({scope: BindingScope.TRANSIENT})
 export class MyUserService implements UserService<User, LoginInputParams> {
@@ -16,6 +17,8 @@ export class MyUserService implements UserService<User, LoginInputParams> {
     public userRepository: UserRepository,
     @service(PokemonService)
     public pokemonService: PokemonService,
+    @service(ValidatorService)
+    public validatorService: ValidatorService,
   ) {}
 
   async verifyCredentials({
@@ -23,6 +26,8 @@ export class MyUserService implements UserService<User, LoginInputParams> {
     password,
   }: LoginInputParams): Promise<User> {
     const invalidCredentialsError = 'Invalid username or password';
+
+    this.validatorService.validateLogin({username, password});
 
     const retrievedUser = await this.userRepository.findOne({
       where: {username},

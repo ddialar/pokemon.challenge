@@ -1,1 +1,1 @@
-export * from './authentication.types';
+export * from './pokemon.types';

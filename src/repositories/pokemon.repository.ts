@@ -2,13 +2,7 @@ import {inject} from '@loopback/core';
 import {DefaultCrudRepository, Filter} from '@loopback/repository';
 import {MongoDataSource} from '../datasources';
 import {Pokemon, PokemonRelations} from '../models';
-
-export type PokemonRequestFilter = {
-  name?: string;
-  type?: string;
-  skip?: number;
-  limit?: number;
-};
+import {PokemonRequestFilter} from '../types';
 
 export class PokemonRepository extends DefaultCrudRepository<
   Pokemon,
@@ -19,7 +13,51 @@ export class PokemonRepository extends DefaultCrudRepository<
     super(Pokemon, dataSource);
   }
 
-  async findFiltered(filter: Filter<Pokemon>): Promise<Pokemon[]> {
+  async findByName(name: string): Promise<Pokemon | null> {
+    const nameRegex = new RegExp(name, 'i');
+    const filter = {
+      where: {
+        name: {
+          regexp: nameRegex,
+        },
+      },
+    };
+
+    return this.findOne(filter);
+  }
+
+  async findTypesPerPokemon(): Promise<string[][]> {
+    return (await this.find({fields: {types: true}})).map(({types}) => types);
+  }
+
+  async findFiltered({
+    name,
+    type,
+    page,
+    limit,
+    favorite,
+  }: PokemonRequestFilter): Promise<Pokemon[]> {
+    const where = {
+      name: name && {regexp: new RegExp(name, 'i')},
+      types: type ? {inq: [[type]]} : undefined,
+      favorite: favorite ? favorite : undefined,
+    };
+
+    const filter: Filter<Pokemon> = {
+      where,
+      skip: page && limit ? (page - 1) * limit : undefined,
+      limit,
+      order: ['id ASC'],
+    };
+
     return this.find(filter);
+  }
+
+  async markAsFavorite(pokemon: Pokemon): Promise<void> {
+    await this.update(new Pokemon({...pokemon, favorite: true}));
+  }
+
+  async unmarkAsFavorite(pokemon: Pokemon): Promise<void> {
+    await this.update(new Pokemon({...pokemon, favorite: false}));
   }
 }

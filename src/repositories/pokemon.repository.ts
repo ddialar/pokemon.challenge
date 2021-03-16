@@ -48,7 +48,7 @@ export class PokemonRepository extends DefaultCrudRepository<
     favorite,
   }: PokemonRequestFilter): Promise<Pokemon[]> {
     const where = {
-      name: name && {regexp: new RegExp(name, 'i')},
+      name: name ? {regexp: new RegExp(name, 'i')} : undefined,
       types: type ? {inq: [[type]]} : undefined,
       favorite: favorite ? favorite : undefined,
     };

@@ -102,19 +102,17 @@ export class PokemonService {
     this.validationService.validatePokemonId(id);
 
     try {
-      const retrievedPokemon = await this.pokemonRepository.findById(id);
+      const retrievedPokemon = await this.pokemonRepository.findByPokemonId(id);
 
       if (!retrievedPokemon) {
-        throw new HttpErrors.NotFound();
+        throw new Error('PokemonNotFound')
       }
 
       await this.pokemonRepository.markAsFavorite(retrievedPokemon);
     } catch (error) {
-      throw error.isHttpError
-        ? error
-        : new HttpErrors.InternalServerError(
-            `Marking pokemon '${id}' as favorite: ${error.message}`,
-          );
+      throw error.message.match('PokemonNotFound')
+        ? new HttpErrors.NotFound(`Pokemon with id '${id}' is not registered`,)
+        : new HttpErrors.InternalServerError(`Marking pokemon '${id}' as favorite: ${error.message}`);
     }
   }
 
@@ -122,19 +120,17 @@ export class PokemonService {
     this.validationService.validatePokemonId(id);
 
     try {
-      const retrievedPokemon = await this.pokemonRepository.findById(id);
+      const retrievedPokemon = await this.pokemonRepository.findByPokemonId(id);
 
       if (!retrievedPokemon) {
-        throw new HttpErrors.NotFound();
+        throw new Error('PokemonNotFound')
       }
 
       await this.pokemonRepository.unmarkAsFavorite(retrievedPokemon);
     } catch (error) {
-      throw error.isHttpError
-        ? error
-        : new HttpErrors.InternalServerError(
-            `Unmarking pokemon '${id}' as favorite: ${error.message}`,
-          );
+      throw error.message.match('PokemonNotFound')
+        ? new HttpErrors.NotFound(`Pokemon with id '${id}' is not registered`,)
+        : new HttpErrors.InternalServerError(`Unmarking pokemon '${id}' as favorite: ${error.message}`);
     }
   }
 }

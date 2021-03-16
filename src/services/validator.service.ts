@@ -1,36 +1,59 @@
 import {BindingScope, injectable} from '@loopback/core';
 import {HttpErrors} from '@loopback/rest';
-import {LoginInputParams} from '../types';
 import * as validators from './../validators';
 
 @injectable({scope: BindingScope.TRANSIENT})
 export class ValidatorService {
-  validateLogin({username, password}: LoginInputParams, message?: string) {
-    const {error} = validators.validateLoginData({username, password});
-
-    if (error) {
-      throw new HttpErrors.BadRequest(
-        `${message ?? 'Username or password is not valid'}: ${error}`,
-      );
-    }
-  }
-
-  validatePokemonId(pokemonId: string, message?: string) {
+  validatePokemonId(pokemonId: string) {
     const {error} = validators.validatePokemonId(pokemonId);
 
     if (error) {
+      throw new HttpErrors.BadRequest(`Pokemon id format mismatch: ${error}`);
+    }
+  }
+
+  validatePokemonName(pokemonName?: string, required?: boolean) {
+    const {error} = validators.validatePokemonName(pokemonName, required);
+
+    if (error) {
+      throw new HttpErrors.BadRequest(`Pokemon name not valid: ${error}`);
+    }
+  }
+
+  validatePokemonType(pokemonType?: string) {
+    const {error} = validators.validatePokemonType(pokemonType);
+
+    if (error) {
+      throw new HttpErrors.BadRequest(`Pokemon name not valid: ${error}`);
+    }
+  }
+
+  validateFilterPage(page: number) {
+    const {error} = validators.validateFilterPage(page);
+
+    if (error) {
       throw new HttpErrors.BadRequest(
-        `${message ?? 'Pokemon id format mismatch'}: ${error}`,
+        `The pagination value is not valid: ${error}`,
       );
     }
   }
 
-  validatePokemonName(pokemonName: string, message?: string) {
-    const {error} = validators.validatePokemonName(pokemonName);
+  validateFilterLimit(limit: number) {
+    const {error} = validators.validateFilterLimit(limit);
 
     if (error) {
       throw new HttpErrors.BadRequest(
-        `${message ?? 'Pokemon name not valid'}: ${error}`,
+        `The pagination value is not valid: ${error}`,
+      );
+    }
+  }
+
+  validateFilterFavorite(favorite?: boolean) {
+    const {error} = validators.validateFilterFavorite(favorite);
+
+    if (error) {
+      throw new HttpErrors.BadRequest(
+        `The provided favorite options is not valid: ${error}`,
       );
     }
   }

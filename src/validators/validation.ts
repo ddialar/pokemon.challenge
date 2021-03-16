@@ -5,7 +5,7 @@ import {
   pokemonIdSchema,
   pokemonNameRequiredSchema,
   pokemonNameSchema,
-  pokemonTypeSchema,
+  pokemonTypeSchema
 } from './validation.schemas';
 
 interface ValidationResult {
@@ -22,7 +22,7 @@ export const validatePokemonName = (
   required = false,
 ): ValidationResult => {
   const {error} = required
-    ? pokemonNameRequiredSchema.validate({pokemonName})
+    ? pokemonNameRequiredSchema.validate({pokemonNameRequired: pokemonName})
     : pokemonNameSchema.validate({pokemonName});
   return {error: error?.details[0].message};
 };

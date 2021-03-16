@@ -40,16 +40,14 @@ export class PokemonService {
       const retrievedPokemon = await this.pokemonRepository.findByName(name);
 
       if (!retrievedPokemon) {
-        throw new HttpErrors.NotFound();
+        throw new Error('PokemonNotFound')
       }
 
       return retrievedPokemon;
     } catch (error) {
-      throw error.isHttpError
-        ? error
-        : new HttpErrors.InternalServerError(
-            `Retrieving pokemon by name '${name}': ${error.message}`,
-          );
+      throw error.message.match('PokemonNotFound')
+        ? new HttpErrors.NotFound(`Pokemon with name '${name}' is not registered`,)
+        : new HttpErrors.InternalServerError(`Retrieving pokemon by name '${name}': ${error.message}`);
     }
   }
 

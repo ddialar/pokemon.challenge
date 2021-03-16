@@ -19,11 +19,17 @@ export class PokemonService {
     this.validationService.validatePokemonId(id);
 
     try {
-      return await this.pokemonRepository.findById(id);
-    } catch ({message}) {
-      throw new HttpErrors.InternalServerError(
-        `Retrieving pokemon with id '${id}': ${message}`,
-      );
+      const retrievedPokemon = await this.pokemonRepository.findByPokemonId(id);
+
+      if (!retrievedPokemon) {
+        throw new Error('PokemonNotFound')
+      }
+
+      return retrievedPokemon;
+    } catch (error) {
+      throw error.message.match('PokemonNotFound')
+        ? new HttpErrors.NotFound(`Pokemon with id '${id}' is not registered`,)
+        : new HttpErrors.InternalServerError(`Retrieving pokemon with id '${id}': ${error.message}`);
     }
   }
 

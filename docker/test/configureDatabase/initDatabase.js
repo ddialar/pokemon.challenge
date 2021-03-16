@@ -1,16 +1,34 @@
+load('/docker-entrypoint-initdb.d/pokemonsDataToBePersisted.js');
+
+const DATABASE_NAME = 'ddialar-pokemon-test';
+
 const apiDatabases = [
   {
-    dbName: 'ts-course-test',
+    dbName: DATABASE_NAME,
     dbUsers: [
       {
-        username: 'tstest',
-        password: 'tstest',
-        roles: ['readWrite', 'dbAdmin'],
+        username: 'pokemontest',
+        password: 'pokemontest',
+        roles: [
+          {
+            role: 'readWrite',
+            db: DATABASE_NAME,
+          },
+        ],
       },
     ],
-    dbData: [],
+    dbData: [
+      {
+        collection: 'Pokemon',
+        data: pokemonsDataToBePersisted,
+      },
+    ],
   },
 ];
+
+const collections = {
+  Pokemon: (db, pokemonData) => db.Pokemon.insert(pokemonData),
+};
 
 const createDatabaseUsers = (db, dbName, users) => {
   users.map(dbUserData => {
@@ -18,20 +36,10 @@ const createDatabaseUsers = (db, dbName, users) => {
       `[TRACE] Creating new user '${dbUserData.username}' into the '${dbName}' database...`,
     );
 
-    const roles = dbUserData.roles.reduce((previousValue, role) => {
-      const roleDefinition = {
-        role,
-        db: dbName,
-      };
-
-      previousValue.push(roleDefinition);
-      return previousValue;
-    }, []);
-
     db.createUser({
       user: dbUserData.username,
       pwd: dbUserData.password,
-      roles,
+      roles: dbUserData.roles,
     });
 
     print(
@@ -40,14 +48,28 @@ const createDatabaseUsers = (db, dbName, users) => {
   });
 };
 
+const populateDatabase = (db, data) => {
+  if (data !== null && data.length > 0) {
+    data.map(setOfData => {
+      print(
+        `[TRACE] Persisting data of collection '${setOfData.collection}'...`,
+      );
+      setOfData.data.map(document =>
+        collections[setOfData.collection](db, document),
+      );
+    });
+  }
+};
+
 try {
   apiDatabases.map(database => {
-    const {dbName, dbUsers} = database;
+    const {dbName, dbUsers, dbData} = database;
 
     db = db.getSiblingDB(dbName);
 
     print(`[TRACE] Switching to '${dbName}' database...`);
     createDatabaseUsers(db, dbName, dbUsers);
+    populateDatabase(db, dbData);
   });
 } catch ({message}) {
   print(`[ERROR ] ${message}`);

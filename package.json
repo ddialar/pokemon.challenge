@@ -19,16 +19,13 @@
   "scripts": {
     "build": "lb-tsc",
     "build:watch": "lb-tsc --watch",
-    "lint": "npm run eslint && npm run prettier:check",
-    "lint:fix": "npm run eslint:fix && npm run prettier:fix",
+    "lint": "npm run eslint",
+    "lint:fix": "npm run eslint:fix",
     "lint:lockfile": "lockfile-lint --path package-lock.json --type npm --validate-https --allowed-hotst npm",
-    "prettier:cli": "lb-prettier \"**/*.ts\" \"**/*.js\"",
-    "prettier:check": "npm run prettier:cli -- -l",
-    "prettier:fix": "npm run prettier:cli -- --write",
     "eslint": "lb-eslint --report-unused-disable-directives .",
     "eslint:fix": "npm run eslint -- --fix",
     "pretest": "npm run rebuild",
-    "test": "lb-mocha --allow-console-logs \"dist/__tests__\"",
+    "test": "npm run test_infra:up && lb-mocha --allow-console-logs \"dist/__tests__\" && npm run test_infra:down",
     "posttest": "npm run lint",
     "test:dev": "lb-mocha --allow-console-logs dist/__tests__/**/*.js && npm run posttest",
     "premigrate": "npm run build",
@@ -43,6 +40,8 @@
     "deps:sec-scan": "npm run lint:lockfile",
     "dev_infra:up": "docker-compose --env-file docker/dev/.docker.env -f docker/docker-compose.yml up -d",
     "dev_infra:down": "docker-compose --env-file docker/dev/.docker.env -f docker/docker-compose.yml down -v",
+    "test_infra:up": "docker-compose --env-file docker/test/.docker.env -f docker/docker-compose.yml up -d",
+    "test_infra:down": "docker-compose --env-file docker/test/.docker.env -f docker/docker-compose.yml down -v",
     "prepare": "husky install"
   },
   "repository": {

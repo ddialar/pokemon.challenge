@@ -46,6 +46,11 @@ export class Pokemon extends Entity {
   evolutions?: Evolution[];
 
   @property({
+    type: 'boolean',
+  })
+  favorite: boolean;
+
+  @property({
     type: 'number',
     required: true,
   })

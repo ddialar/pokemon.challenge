@@ -12,10 +12,10 @@ const apiDatabases = [
         roles: [
           {
             role: 'readWrite',
-            db: DATABASE_NAME
-          }
-        ]
-      }
+            db: DATABASE_NAME,
+          },
+        ],
+      },
     ],
     dbData: [
       {
@@ -39,7 +39,7 @@ const createDatabaseUsers = (db, dbName, users) => {
     db.createUser({
       user: dbUserData.username,
       pwd: dbUserData.password,
-      roles: dbUserData.roles
+      roles: dbUserData.roles,
     });
 
     print(

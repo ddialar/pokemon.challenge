@@ -39,7 +39,7 @@ describe('[CONTROLLERS] - Pokemon - /pokemons/name/{name}', () => {
       .then();
   });
 
-  it('returns NOT_FOUND (404) when a not persisted name is provided', async () => {
+  it('returns NOT_FOUND (404) when we ask for a not persisted pokemon', async () => {
     const pokemonName = testingNonPersistedPokemonName;
     await client
       .get(`/pokemons/name/${pokemonName}`)
@@ -47,7 +47,7 @@ describe('[CONTROLLERS] - Pokemon - /pokemons/name/{name}', () => {
       .then();
   });
 
-  it('returns BAD_REQUEST (400) when the pokemon name is not provided', async () => {
+  it('returns NOT_FOUND (404) when the pokemon name is not provided', async () => {
     await client
       .get(`/pokemons/name/`)
       .expect(404)

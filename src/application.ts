@@ -4,10 +4,11 @@ import {RepositoryMixin} from '@loopback/repository';
 import {OpenApiSpec, RestApplication} from '@loopback/rest';
 import {
   RestExplorerBindings,
-  RestExplorerComponent,
+  RestExplorerComponent
 } from '@loopback/rest-explorer';
 import {ServiceMixin} from '@loopback/service-proxy';
 import path from 'path';
+import {loggerMiddleware} from './middlewares/logger.middleware';
 import {MySequence} from './sequence';
 
 export {ApplicationConfig};
@@ -26,6 +27,8 @@ export class Main extends BootMixin(
 ) {
   constructor(options: ApplicationConfig = {}) {
     super(options);
+
+    this.middleware(loggerMiddleware);
 
     this.setUpBindings();
 

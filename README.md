@@ -243,6 +243,8 @@ npm run test:ci
 npm run start:postman
 ```
 
+The workspace configuration for Postman is also published at this [link](https://www.postman.com/ddialar/workspace/ddialar-pokemon-challenge/request/999892-eea02d9a-3eb5-4a78-9b85-6ec4e4fa20f3).
+
 ### <a id="commands-dev-mode"></a>🏭 Run application in development mode
 
 **Required files:**

@@ -236,12 +236,14 @@ npm run test:ci
 **For testing with Postman**
 
 - `env/.postman.env`
-- Files at `test/postman` folder loaded in Postman.
+- Importar en Postman los archivos que están en el directorio `test/postman`.
 
 ```sh
 # Run the specific environment for Postman.
 npm run start:postman
 ```
+
+La configuración del área de trabajo para Postman también está publicada en este [enlace](https://www.postman.com/ddialar/workspace/ddialar-pokemon-challenge/request/999892-eea02d9a-3eb5-4a78-9b85-6ec4e4fa20f3).
 
 ### <a id="commands-dev-mode"></a>🏭 Ejecución de la aplicación en modo desarrollo
 

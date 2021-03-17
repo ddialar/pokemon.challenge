@@ -2,35 +2,35 @@
 
 <img src="https://img.shields.io/badge/Version-1.0.0-yellow" /> <img src="https://img.shields.io/badge/Loopback-4-blue" /> <img src="https://img.shields.io/badge/TypeScript-4.1.3-blue" /> <img src="https://img.shields.io/badge/openApi-4.1.5-green" /> <img src="https://img.shields.io/badge/Docker-20.10.2-blue" />
 
-[🇪🇸 Version](https://github.com/ddialar/pokemon.challenge/blob/master/docs/README_ES.md)
+[🇪🇸 Version](https://github.com/ddialar/pokemon.challenge/blob/master/README.md/blob/master/docs/README_ES.md)
 
 ## 📖 Index
 
-- [Description](https://github.com/ddialar/pokemon.challenge#description)
-- [System requirements](https://github.com/ddialar/pokemon.challenge#requirements)
-- [Repository overview](https://github.com/ddialar/pokemon.challenge#repository-overview)
-  - [Environment variables](https://github.com/ddialar/pokemon.challenge#repository-overview-environment-variables)
-  - [Architecture](https://github.com/ddialar/pokemon.challenge#repository-overview-architecture)
-    - [controllers](https://github.com/ddialar/pokemon.challenge#repository-overview-architecture-controllers)
-    - [datasources](https://github.com/ddialar/pokemon.challenge#repository-overview-architecture-datasources)
-    - [middlewares](https://github.com/ddialar/pokemon.challenge#repository-overview-architecture-middlewares)
-    - [models](https://github.com/ddialar/pokemon.challenge#repository-overview-architecture-models)
-    - [repositories](https://github.com/ddialar/pokemon.challenge#repository-overview-architecture-repositories)
-    - [services](https://github.com/ddialar/pokemon.challenge#repository-overview-architecture-services)
-    - [validators](https://github.com/ddialar/pokemon.challenge#repository-overview-architecture-validators)
-    - [types](https://github.com/ddialar/pokemon.challenge#repository-overview-architecture-types)
-    - [tests](https://github.com/ddialar/pokemon.challenge#repository-overview-architecture-tests)
-  - [Execution environments](https://github.com/ddialar/pokemon.challenge#repository-overview-environments)
-- [Commands guide](https://github.com/ddialar/pokemon.challenge#commands)
-  - [Switch Node version](https://github.com/ddialar/pokemon.challenge#commands-switch-node)
-  - [Modules installation process](https://github.com/ddialar/pokemon.challenge#commands-installation)
-  - [Run tests](https://github.com/ddialar/pokemon.challenge#commands-tests)
-  - [Run application in development mode](https://github.com/ddialar/pokemon.challenge#commands-dev-mode)
-  - [Build application](https://github.com/ddialar/pokemon.challenge#commands-pro-mode)
-  - [Fix code style and formatting issues](https://github.com/ddialar/pokemon.challenge#commands-lint)
-  - [Other useful commands](https://github.com/ddialar/pokemon.challenge#commands-other)
-- [API REST documentation](https://github.com/ddialar/pokemon.challenge#apidoc)
-- [Final notes](https://github.com/ddialar/pokemon.challenge#final-notes)
+- [Description](https://github.com/ddialar/pokemon.challenge/blob/master/README.md#description)
+- [System requirements](https://github.com/ddialar/pokemon.challenge/blob/master/README.md#requirements)
+- [Repository overview](https://github.com/ddialar/pokemon.challenge/blob/master/README.md#repository-overview)
+  - [Environment variables](https://github.com/ddialar/pokemon.challenge/blob/master/README.md#repository-overview-environment-variables)
+  - [Architecture](https://github.com/ddialar/pokemon.challenge/blob/master/README.md#repository-overview-architecture)
+    - [controllers](https://github.com/ddialar/pokemon.challenge/blob/master/README.md#repository-overview-architecture-controllers)
+    - [datasources](https://github.com/ddialar/pokemon.challenge/blob/master/README.md#repository-overview-architecture-datasources)
+    - [middlewares](https://github.com/ddialar/pokemon.challenge/blob/master/README.md#repository-overview-architecture-middlewares)
+    - [models](https://github.com/ddialar/pokemon.challenge/blob/master/README.md#repository-overview-architecture-models)
+    - [repositories](https://github.com/ddialar/pokemon.challenge/blob/master/README.md#repository-overview-architecture-repositories)
+    - [services](https://github.com/ddialar/pokemon.challenge/blob/master/README.md#repository-overview-architecture-services)
+    - [validators](https://github.com/ddialar/pokemon.challenge/blob/master/README.md#repository-overview-architecture-validators)
+    - [types](https://github.com/ddialar/pokemon.challenge/blob/master/README.md#repository-overview-architecture-types)
+    - [tests](https://github.com/ddialar/pokemon.challenge/blob/master/README.md#repository-overview-architecture-tests)
+  - [Execution environments](https://github.com/ddialar/pokemon.challenge/blob/master/README.md#repository-overview-environments)
+- [Commands guide](https://github.com/ddialar/pokemon.challenge/blob/master/README.md#commands)
+  - [Switch Node version](https://github.com/ddialar/pokemon.challenge/blob/master/README.md#commands-switch-node)
+  - [Modules installation process](https://github.com/ddialar/pokemon.challenge/blob/master/README.md#commands-installation)
+  - [Run tests](https://github.com/ddialar/pokemon.challenge/blob/master/README.md#commands-tests)
+  - [Run application in development mode](https://github.com/ddialar/pokemon.challenge/blob/master/README.md#commands-dev-mode)
+  - [Build application](https://github.com/ddialar/pokemon.challenge/blob/master/README.md#commands-pro-mode)
+  - [Fix code style and formatting issues](https://github.com/ddialar/pokemon.challenge/blob/master/README.md#commands-lint)
+  - [Other useful commands](https://github.com/ddialar/pokemon.challenge/blob/master/README.md#commands-other)
+- [API REST documentation](https://github.com/ddialar/pokemon.challenge/blob/master/README.md#apidoc)
+- [Final notes](https://github.com/ddialar/pokemon.challenge/blob/master/README.md#final-notes)
 
 ## <a id="description"></a>🔍 Description
 
@@ -313,7 +313,7 @@ npm run openapi-spec
 
 `http://127.0.0.1:3000/explorer/`
 
-The access port must be defined in the environment variables. Take a look to the [**environment variables**](https://github.com/ddialar/pokemon.challenge#repository-overview-environment-variables) section.
+The access port must be defined in the environment variables. Take a look to the [**environment variables**](https://github.com/ddialar/pokemon.challenge/blob/master/README.md#repository-overview-environment-variables) section.
 
 ## <a id="final-notes"></a>🔍 Final notes
 

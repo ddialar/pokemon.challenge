@@ -1,0 +1,583 @@
+{
+	"id": "500fe171-1f16-4ba6-931d-aab4f3a29737",
+	"name": "Pokemon",
+	"timestamp": "2021-03-17T17:41:56.653Z",
+	"collection_id": "8858be1c-6b2b-4e00-bd20-74541f42dd13",
+	"folder_id": 0,
+	"environment_id": "65e872e1-865a-482b-8da4-d5c1c45120c9",
+	"totalPass": 38,
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "eea02d9a-3eb5-4a78-9b85-6ec4e4fa20f3",
+			"name": "by id",
+			"time": 10,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"returns NOT_FOUND (404) when we ask for a not persisted pokemon": true
+			},
+			"testPassFailCounts": {
+				"returns the required pokemon by its id": {
+					"pass": 1,
+					"fail": 0
+				},
+				"returns BAD_REQUEST (400) when the pokemon id is longer that allowed": {
+					"pass": 1,
+					"fail": 0
+				},
+				"returns BAD_REQUEST (400) when the pokemon id is shorter that allowed": {
+					"pass": 1,
+					"fail": 0
+				},
+				"returns BAD_REQUEST (400) when the pokemon id has not allowed character": {
+					"pass": 1,
+					"fail": 0
+				},
+				"returns NOT_FOUND (404) when we ask for a not persisted pokemon": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				15,
+				5,
+				9,
+				10,
+				10
+			],
+			"allTests": [
+				{
+					"returns the required pokemon by its id": true
+				},
+				{
+					"returns BAD_REQUEST (400) when the pokemon id is longer that allowed": true
+				},
+				{
+					"returns BAD_REQUEST (400) when the pokemon id is shorter that allowed": true
+				},
+				{
+					"returns BAD_REQUEST (400) when the pokemon id has not allowed character": true
+				},
+				{
+					"returns NOT_FOUND (404) when we ask for a not persisted pokemon": true
+				}
+			]
+		},
+		{
+			"id": "85f455b7-f4b1-459c-8b19-f16e2e98e366",
+			"name": "by name",
+			"time": 4,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"returns NOT_FOUND (404) when the pokemon name is not provided": true
+			},
+			"testPassFailCounts": {
+				"returns the required pokemon by its name": {
+					"pass": 1,
+					"fail": 0
+				},
+				"returns BAD_REQUEST (400) when the pokemon name has not allowed character": {
+					"pass": 1,
+					"fail": 0
+				},
+				"returns NOT_FOUND (404) when we ask for a not persisted pokemon": {
+					"pass": 1,
+					"fail": 0
+				},
+				"returns NOT_FOUND (404) when the pokemon name is not provided": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				7,
+				6,
+				9,
+				4
+			],
+			"allTests": [
+				{
+					"returns the required pokemon by its name": true
+				},
+				{
+					"returns BAD_REQUEST (400) when the pokemon name has not allowed character": true
+				},
+				{
+					"returns NOT_FOUND (404) when we ask for a not persisted pokemon": true
+				},
+				{
+					"returns NOT_FOUND (404) when the pokemon name is not provided": true
+				}
+			]
+		},
+		{
+			"id": "b2360756-64cc-4ee6-84ec-309c3b398b07",
+			"name": "types",
+			"url": "http://localhost:3003/pokemons/types",
+			"time": 26,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"returns the expected pokemon types": true
+			},
+			"testPassFailCounts": {
+				"returns the expected pokemon types": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				26
+			],
+			"allTests": [
+				{
+					"returns the expected pokemon types": true
+				}
+			]
+		},
+		{
+			"id": "d5c02a00-5253-4923-a4f1-e0b1081a5b9f",
+			"name": "mark as favorite",
+			"time": 10,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"returns NOT_FOUND (404) when we ask for a not persisted pokemon": true
+			},
+			"testPassFailCounts": {
+				"marks the selected pokemon as favorite": {
+					"pass": 1,
+					"fail": 0
+				},
+				"returns BAD_REQUEST (400) when the pokemon id is longer that allowed": {
+					"pass": 1,
+					"fail": 0
+				},
+				"returns BAD_REQUEST (400) when the pokemon id is shorter that allowed": {
+					"pass": 1,
+					"fail": 0
+				},
+				"returns BAD_REQUEST (400) when the pokemon id has not allowed character": {
+					"pass": 1,
+					"fail": 0
+				},
+				"returns NOT_FOUND (404) when we ask for a not persisted pokemon": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				21,
+				5,
+				4,
+				4,
+				10
+			],
+			"allTests": [
+				{
+					"marks the selected pokemon as favorite": true
+				},
+				{
+					"returns BAD_REQUEST (400) when the pokemon id is longer that allowed": true
+				},
+				{
+					"returns BAD_REQUEST (400) when the pokemon id is shorter that allowed": true
+				},
+				{
+					"returns BAD_REQUEST (400) when the pokemon id has not allowed character": true
+				},
+				{
+					"returns NOT_FOUND (404) when we ask for a not persisted pokemon": true
+				}
+			]
+		},
+		{
+			"id": "08b96a4d-ea39-47a7-91f0-eba4c5f6788b",
+			"name": "filtering",
+			"time": 4,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"[FAVORITE] - returns BAD_REQUEST (400) when the favorite parameter has not allowed characters": true
+			},
+			"testPassFailCounts": {
+				"[LIMIT] - returns the amount of pokemons limited by configuration, when no filtering parameters are provided": {
+					"pass": 1,
+					"fail": 0
+				},
+				"[LIMIT] - returns the amount of pokemons limited by custom value": {
+					"pass": 1,
+					"fail": 0
+				},
+				"[LIMIT] - returns the whole list of pokemons when limit is set to 0": {
+					"pass": 1,
+					"fail": 0
+				},
+				"[LIMIT] - returns BAD_REQUEST (400) when the filter value is lower than allowed": {
+					"pass": 1,
+					"fail": 0
+				},
+				"[LIMIT] - returns BAD_REQUEST (400) when the filter value is not valid": {
+					"pass": 1,
+					"fail": 0
+				},
+				"[NAME] - returns the required pokemon by its name": {
+					"pass": 1,
+					"fail": 0
+				},
+				"[NAME] - returns an empty array when we ask for a not persisted pokemon": {
+					"pass": 1,
+					"fail": 0
+				},
+				"[NAME] - returns BAD_REQUEST (400) when the pokemon name has not allowed character": {
+					"pass": 1,
+					"fail": 0
+				},
+				"[TYPE] - returns the required pokemons by its type": {
+					"pass": 1,
+					"fail": 0
+				},
+				"[TYPE] - returns an empty array when ask for a not persisted type": {
+					"pass": 1,
+					"fail": 0
+				},
+				"[TYPE] - returns BAD_REQUEST (400) when the pokemon type has not allowed character": {
+					"pass": 1,
+					"fail": 0
+				},
+				"[PAGINATION] - returns the required pokemons in the defined range": {
+					"pass": 1,
+					"fail": 0
+				},
+				"[PAGINATION] - returns an empty array when the parameters are out of range": {
+					"pass": 1,
+					"fail": 0
+				},
+				"[PAGINATION] - returns BAD_REQUEST (400) when the page parameter has not allowed value": {
+					"pass": 1,
+					"fail": 0
+				},
+				"[PAGINATION] - returns BAD_REQUEST (400) when the page parameter has not allowed characters": {
+					"pass": 1,
+					"fail": 0
+				},
+				"[FAVORITE] - returns the pokemons marked as favorite": {
+					"pass": 1,
+					"fail": 0
+				},
+				"[FAVORITE] - returns the whole pokemons, limited by default, when favorite is false, independently whether they are markes as favorite or not": {
+					"pass": 1,
+					"fail": 0
+				},
+				"[FAVORITE] - returns BAD_REQUEST (400) when the favorite parameter has not allowed characters": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				50,
+				20,
+				44,
+				5,
+				5,
+				10,
+				8,
+				4,
+				13,
+				8,
+				4,
+				15,
+				11,
+				5,
+				7,
+				10,
+				35,
+				4
+			],
+			"allTests": [
+				{
+					"[LIMIT] - returns the amount of pokemons limited by configuration, when no filtering parameters are provided": true
+				},
+				{
+					"[LIMIT] - returns the amount of pokemons limited by custom value": true
+				},
+				{
+					"[LIMIT] - returns the whole list of pokemons when limit is set to 0": true
+				},
+				{
+					"[LIMIT] - returns BAD_REQUEST (400) when the filter value is lower than allowed": true
+				},
+				{
+					"[LIMIT] - returns BAD_REQUEST (400) when the filter value is not valid": true
+				},
+				{
+					"[NAME] - returns the required pokemon by its name": true
+				},
+				{
+					"[NAME] - returns an empty array when we ask for a not persisted pokemon": true
+				},
+				{
+					"[NAME] - returns BAD_REQUEST (400) when the pokemon name has not allowed character": true
+				},
+				{
+					"[TYPE] - returns the required pokemons by its type": true
+				},
+				{
+					"[TYPE] - returns an empty array when ask for a not persisted type": true
+				},
+				{
+					"[TYPE] - returns BAD_REQUEST (400) when the pokemon type has not allowed character": true
+				},
+				{
+					"[PAGINATION] - returns the required pokemons in the defined range": true
+				},
+				{
+					"[PAGINATION] - returns an empty array when the parameters are out of range": true
+				},
+				{
+					"[PAGINATION] - returns BAD_REQUEST (400) when the page parameter has not allowed value": true
+				},
+				{
+					"[PAGINATION] - returns BAD_REQUEST (400) when the page parameter has not allowed characters": true
+				},
+				{
+					"[FAVORITE] - returns the pokemons marked as favorite": true
+				},
+				{
+					"[FAVORITE] - returns the whole pokemons, limited by default, when favorite is false, independently whether they are markes as favorite or not": true
+				},
+				{
+					"[FAVORITE] - returns BAD_REQUEST (400) when the favorite parameter has not allowed characters": true
+				}
+			]
+		},
+		{
+			"id": "4a774efe-6bf9-4a9d-9a5f-be52a964b394",
+			"name": "unmark as favorite",
+			"time": 9,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"returns NOT_FOUND (404) when we ask for a not persisted pokemon": true
+			},
+			"testPassFailCounts": {
+				"marks the selected pokemon as favorite": {
+					"pass": 1,
+					"fail": 0
+				},
+				"returns BAD_REQUEST (400) when the pokemon id is longer that allowed": {
+					"pass": 1,
+					"fail": 0
+				},
+				"returns BAD_REQUEST (400) when the pokemon id is shorter that allowed": {
+					"pass": 1,
+					"fail": 0
+				},
+				"returns BAD_REQUEST (400) when the pokemon id has not allowed character": {
+					"pass": 1,
+					"fail": 0
+				},
+				"returns NOT_FOUND (404) when we ask for a not persisted pokemon": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				14,
+				4,
+				5,
+				4,
+				9
+			],
+			"allTests": [
+				{
+					"marks the selected pokemon as favorite": true
+				},
+				{
+					"returns BAD_REQUEST (400) when the pokemon id is longer that allowed": true
+				},
+				{
+					"returns BAD_REQUEST (400) when the pokemon id is shorter that allowed": true
+				},
+				{
+					"returns BAD_REQUEST (400) when the pokemon id has not allowed character": true
+				},
+				{
+					"returns NOT_FOUND (404) when we ask for a not persisted pokemon": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 439,
+	"collection": {
+		"requests": [
+			{
+				"id": "eea02d9a-3eb5-4a78-9b85-6ec4e4fa20f3",
+				"method": "GET"
+			},
+			{
+				"id": "eea02d9a-3eb5-4a78-9b85-6ec4e4fa20f3",
+				"method": "GET"
+			},
+			{
+				"id": "eea02d9a-3eb5-4a78-9b85-6ec4e4fa20f3",
+				"method": "GET"
+			},
+			{
+				"id": "eea02d9a-3eb5-4a78-9b85-6ec4e4fa20f3",
+				"method": "GET"
+			},
+			{
+				"id": "eea02d9a-3eb5-4a78-9b85-6ec4e4fa20f3",
+				"method": "GET"
+			},
+			{
+				"id": "85f455b7-f4b1-459c-8b19-f16e2e98e366",
+				"method": "GET"
+			},
+			{
+				"id": "85f455b7-f4b1-459c-8b19-f16e2e98e366",
+				"method": "GET"
+			},
+			{
+				"id": "85f455b7-f4b1-459c-8b19-f16e2e98e366",
+				"method": "GET"
+			},
+			{
+				"id": "85f455b7-f4b1-459c-8b19-f16e2e98e366",
+				"method": "GET"
+			},
+			{
+				"id": "b2360756-64cc-4ee6-84ec-309c3b398b07",
+				"method": "GET"
+			},
+			{
+				"id": "d5c02a00-5253-4923-a4f1-e0b1081a5b9f",
+				"method": "PUT"
+			},
+			{
+				"id": "d5c02a00-5253-4923-a4f1-e0b1081a5b9f",
+				"method": "PUT"
+			},
+			{
+				"id": "d5c02a00-5253-4923-a4f1-e0b1081a5b9f",
+				"method": "PUT"
+			},
+			{
+				"id": "d5c02a00-5253-4923-a4f1-e0b1081a5b9f",
+				"method": "PUT"
+			},
+			{
+				"id": "d5c02a00-5253-4923-a4f1-e0b1081a5b9f",
+				"method": "PUT"
+			},
+			{
+				"id": "08b96a4d-ea39-47a7-91f0-eba4c5f6788b",
+				"method": "GET"
+			},
+			{
+				"id": "08b96a4d-ea39-47a7-91f0-eba4c5f6788b",
+				"method": "GET"
+			},
+			{
+				"id": "08b96a4d-ea39-47a7-91f0-eba4c5f6788b",
+				"method": "GET"
+			},
+			{
+				"id": "08b96a4d-ea39-47a7-91f0-eba4c5f6788b",
+				"method": "GET"
+			},
+			{
+				"id": "08b96a4d-ea39-47a7-91f0-eba4c5f6788b",
+				"method": "GET"
+			},
+			{
+				"id": "08b96a4d-ea39-47a7-91f0-eba4c5f6788b",
+				"method": "GET"
+			},
+			{
+				"id": "08b96a4d-ea39-47a7-91f0-eba4c5f6788b",
+				"method": "GET"
+			},
+			{
+				"id": "08b96a4d-ea39-47a7-91f0-eba4c5f6788b",
+				"method": "GET"
+			},
+			{
+				"id": "08b96a4d-ea39-47a7-91f0-eba4c5f6788b",
+				"method": "GET"
+			},
+			{
+				"id": "08b96a4d-ea39-47a7-91f0-eba4c5f6788b",
+				"method": "GET"
+			},
+			{
+				"id": "08b96a4d-ea39-47a7-91f0-eba4c5f6788b",
+				"method": "GET"
+			},
+			{
+				"id": "08b96a4d-ea39-47a7-91f0-eba4c5f6788b",
+				"method": "GET"
+			},
+			{
+				"id": "08b96a4d-ea39-47a7-91f0-eba4c5f6788b",
+				"method": "GET"
+			},
+			{
+				"id": "08b96a4d-ea39-47a7-91f0-eba4c5f6788b",
+				"method": "GET"
+			},
+			{
+				"id": "08b96a4d-ea39-47a7-91f0-eba4c5f6788b",
+				"method": "GET"
+			},
+			{
+				"id": "08b96a4d-ea39-47a7-91f0-eba4c5f6788b",
+				"method": "GET"
+			},
+			{
+				"id": "08b96a4d-ea39-47a7-91f0-eba4c5f6788b",
+				"method": "GET"
+			},
+			{
+				"id": "08b96a4d-ea39-47a7-91f0-eba4c5f6788b",
+				"method": "GET"
+			},
+			{
+				"id": "4a774efe-6bf9-4a9d-9a5f-be52a964b394",
+				"method": "PUT"
+			},
+			{
+				"id": "4a774efe-6bf9-4a9d-9a5f-be52a964b394",
+				"method": "PUT"
+			},
+			{
+				"id": "4a774efe-6bf9-4a9d-9a5f-be52a964b394",
+				"method": "PUT"
+			},
+			{
+				"id": "4a774efe-6bf9-4a9d-9a5f-be52a964b394",
+				"method": "PUT"
+			},
+			{
+				"id": "4a774efe-6bf9-4a9d-9a5f-be52a964b394",
+				"method": "PUT"
+			}
+		]
+	}
+}

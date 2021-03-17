@@ -1,0 +1,799 @@
+{
+	"info": {
+		"_postman_id": "8858be1c-6b2b-4e00-bd20-74541f42dd13",
+		"name": "Pokemon",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "by id",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const selectedPokemonId = \"004\";",
+							"",
+							"let testingCases = pm.globals.get(\"testingCases\");",
+							"",
+							"if (!testingCases || testingCases.length === 0) {",
+							"    testingCases = [",
+							"        {",
+							"            \"description\": \"returns the required pokemon by its id\",",
+							"            \"code\": 200,",
+							"            \"envVariables\": {",
+							"                \"pokemonId\": selectedPokemonId",
+							"            },",
+							"            \"expectedResultEqualTo\": {",
+							"                'id': selectedPokemonId",
+							"            }",
+							"        },",
+							"        {",
+							"            \"description\": \"returns BAD_REQUEST (400) when the pokemon id is longer that allowed\",",
+							"            \"code\": 400,",
+							"            \"envVariables\": {",
+							"                \"pokemonId\": selectedPokemonId.concat(\"234\")",
+							"            },",
+							"            \"expectedResultEqualTo\": null",
+							"        },",
+							"        {",
+							"            \"description\": \"returns BAD_REQUEST (400) when the pokemon id is shorter that allowed\",",
+							"            \"code\": 400,",
+							"            \"envVariables\": {",
+							"                \"pokemonId\": selectedPokemonId.substring(1)",
+							"            },",
+							"            \"expectedResultEqualTo\": null",
+							"        },",
+							"        {",
+							"            \"description\": \"returns BAD_REQUEST (400) when the pokemon id has not allowed character\",",
+							"            \"code\": 400,",
+							"            \"envVariables\": {",
+							"                \"pokemonId\": selectedPokemonId.substring(2).concat('AB')",
+							"            },",
+							"            \"expectedResultEqualTo\": null",
+							"        },",
+							"        {",
+							"            \"description\": \"returns NOT_FOUND (404) when we ask for a not persisted pokemon\",",
+							"            \"code\": 404,",
+							"            \"envVariables\": {",
+							"                \"pokemonId\": pm.globals.get(\"testingNonPersistedPokemonId\")",
+							"            },",
+							"            \"expectedResultEqualTo\": null",
+							"        }",
+							"    ];",
+							"}",
+							"",
+							"const currentTest = testingCases.shift();",
+							"",
+							"pm.globals.set(\"testPayload\", currentTest);",
+							"pm.globals.set(\"testingCases\", testingCases);",
+							"",
+							"Object.entries(currentTest.envVariables).forEach(([key, value]) => pm.globals.set(key, value));"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const testingCases = pm.globals.get(\"testingCases\");",
+							"const testPayload = pm.globals.get(\"testPayload\");",
+							"",
+							"pm.test(testPayload.description, function () {",
+							"    pm.response.to.have.status(testPayload.code);",
+							"",
+							"    if (testPayload.expectedResultEqualTo) {",
+							"        const response = pm.response.json();",
+							"",
+							"        Object.entries(testPayload.expectedResultEqualTo).forEach(([ key, value ]) => {",
+							"            pm.expect(response[key]).to.eql(value);",
+							"        })",
+							"    }",
+							"});",
+							"",
+							"if (testingCases && testingCases.length > 0) {",
+							"    postman.setNextRequest(\"by id\");",
+							"} else {",
+							"    postman.setNextRequest(\"by name\");",
+							"}",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{domain}}{{pokemons}}/:id",
+					"host": [
+						"{{domain}}{{pokemons}}"
+					],
+					"path": [
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "{{pokemonId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "by name",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const testingCases = pm.globals.get(\"testingCases\");",
+							"const testPayload = pm.globals.get(\"testPayload\");",
+							"",
+							"pm.test(testPayload.description, function () {",
+							"    pm.response.to.have.status(testPayload.code);",
+							"",
+							"    if (testPayload.expectedResultEqualTo) {",
+							"        const response = pm.response.json();",
+							"",
+							"        Object.entries(testPayload.expectedResultEqualTo).forEach(([ key, value ]) => {",
+							"            pm.expect(response[key]).to.eql(value);",
+							"        })",
+							"    }",
+							"});",
+							"",
+							"if (testingCases && testingCases.length > 0) {",
+							"    postman.setNextRequest(\"by name\");",
+							"} else {",
+							"    postman.setNextRequest(\"types\");",
+							"}",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const selectedPokemonName = \"Charmander\";",
+							"const selectedPokemonId = \"004\";",
+							"",
+							"let testingCases = pm.globals.get(\"testingCases\");",
+							"",
+							"if (!testingCases || testingCases.length === 0) {",
+							"    testingCases = [",
+							"        {",
+							"            \"description\": \"returns the required pokemon by its name\",",
+							"            \"code\": 200,",
+							"            \"envVariables\": {",
+							"                \"pokemonName\": selectedPokemonName.toLowerCase()",
+							"            },",
+							"            \"expectedResultEqualTo\": {",
+							"                'id': selectedPokemonId",
+							"            }",
+							"        },",
+							"        {",
+							"            \"description\": \"returns BAD_REQUEST (400) when the pokemon name has not allowed character\",",
+							"            \"code\": 400,",
+							"            \"envVariables\": {",
+							"                \"pokemonName\": selectedPokemonName.toLowerCase().concat(\"123\")",
+							"            },",
+							"            \"expectedResultEqualTo\": null",
+							"        },",
+							"        {",
+							"            \"description\": \"returns NOT_FOUND (404) when we ask for a not persisted pokemon\",",
+							"            \"code\": 404,",
+							"            \"envVariables\": {",
+							"                \"pokemonName\": pm.globals.get(\"testingNonPersistedPokemonName\")",
+							"            },",
+							"            \"expectedResultEqualTo\": null",
+							"        },",
+							"        {",
+							"            \"description\": \"returns NOT_FOUND (404) when the pokemon name is not provided\",",
+							"            \"code\": 404,",
+							"            \"envVariables\": {",
+							"                \"pokemonName\": ''",
+							"            },",
+							"            \"expectedResultEqualTo\": null",
+							"        }",
+							"    ];",
+							"}",
+							"",
+							"const currentTest = testingCases.shift();",
+							"",
+							"pm.globals.set(\"testPayload\", currentTest);",
+							"pm.globals.set(\"testingCases\", testingCases);",
+							"",
+							"Object.entries(currentTest.envVariables).forEach(([key, value]) => pm.globals.set(key, value));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{domain}}{{pokemons}}/name/:name",
+					"host": [
+						"{{domain}}{{pokemons}}"
+					],
+					"path": [
+						"name",
+						":name"
+					],
+					"variable": [
+						{
+							"key": "name",
+							"value": "{{pokemonName}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "types",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"let testingCases = pm.globals.get(\"testingCases\");",
+							"",
+							"const expectedResult = [",
+							"    \"Bug\",",
+							"    \"Dragon\",",
+							"    \"Electric\",",
+							"    \"Fairy\",",
+							"    \"Fighting\",",
+							"    \"Fire\",",
+							"    \"Flying\",",
+							"    \"Ghost\",",
+							"    \"Grass\",",
+							"    \"Ground\",",
+							"    \"Ice\",",
+							"    \"Normal\",",
+							"    \"Poison\",",
+							"    \"Psychic\",",
+							"    \"Rock\",",
+							"    \"Steel\",",
+							"    \"Water\"",
+							"];",
+							"",
+							"if (!testingCases || testingCases.length === 0) {",
+							"    testingCases = [",
+							"        {",
+							"            \"description\": \"returns the expected pokemon types\",",
+							"            \"code\": 200,",
+							"            \"expectedResultDeepEqualTo\": expectedResult",
+							"        }",
+							"    ];",
+							"}",
+							"",
+							"const currentTest = testingCases.shift();",
+							"",
+							"pm.globals.set(\"testPayload\", currentTest);",
+							"pm.globals.set(\"testingCases\", testingCases);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const testingCases = pm.globals.get(\"testingCases\");",
+							"const testPayload = pm.globals.get(\"testPayload\");",
+							"",
+							"pm.test(testPayload.description, function () {",
+							"    pm.response.to.have.status(testPayload.code);",
+							"",
+							"    if (testPayload.expectedResultDeepEqualTo) {",
+							"        const response = pm.response.json();",
+							"        pm.expect(response).to.deep.equal(testPayload.expectedResultDeepEqualTo);",
+							"    }",
+							"});",
+							"",
+							"if (testingCases && testingCases.length > 0) {",
+							"    postman.setNextRequest(\"types\");",
+							"} else {",
+							"    postman.setNextRequest(\"mark as favorite\");",
+							"}",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{domain}}{{pokemons}}/types",
+					"host": [
+						"{{domain}}{{pokemons}}"
+					],
+					"path": [
+						"types"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "filtering",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const testingCases = pm.globals.get(\"testingCases\");",
+							"const testPayload = pm.globals.get(\"testPayload\");",
+							"",
+							"pm.test(testPayload.description, function () {",
+							"    pm.response.to.have.status(testPayload.code);",
+							"",
+							"    if (testPayload.responseExpected) {",
+							"        const response = pm.response.json();",
+							"",
+							"        if (testPayload.expectedLength >= 0) {",
+							"            pm.expect(response).to.length(testPayload.expectedLength);",
+							"        }",
+							"        ",
+							"        if (testPayload.expectedResults && testPayload.expectedResults.length >= 0) {",
+							"            testPayload.expectedResults.forEach((expectedResult, index) => {",
+							"                Object.entries(expectedResult).forEach(([ key, value ]) => {",
+							"                    pm.expect(response[index][key]).to.eql(value);",
+							"                })",
+							"            })",
+							"        }",
+							"",
+							"        if (testPayload.reducedExpectedValues) {",
+							"            const reducedResponse = response.map(result => result[testPayload.reducedExpectedValues.key])",
+							"            pm.expect(reducedResponse).to.deep.equal(testPayload.reducedExpectedValues.value);",
+							"        }",
+							"    }",
+							"});",
+							"",
+							"if (testingCases && testingCases.length > 0) {",
+							"    postman.setNextRequest(\"filtering\");",
+							"} else {",
+							"    postman.setNextRequest(\"unmark as favorite\");",
+							"}",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const selectedPokemonName = \"Charmander\";",
+							"const selectedPokemonType = \"Grass\";",
+							"const defaultLimit = 100;",
+							"",
+							"let testingCases = pm.globals.get(\"testingCases\");",
+							"",
+							"if (!testingCases || testingCases.length === 0) {",
+							"    testingCases = [",
+							"        {",
+							"            \"description\": \"[LIMIT] - returns the amount of pokemons limited by configuration, when no filtering parameters are provided\",",
+							"            \"code\": 200,",
+							"            \"params\": {},",
+							"            \"responseExpected\": true,",
+							"            \"expectedLength\": defaultLimit",
+							"        },",
+							"        {",
+							"            \"description\": \"[LIMIT] - returns the amount of pokemons limited by custom value\",",
+							"            \"code\": 200,",
+							"            \"params\": {",
+							"                limit: 50",
+							"            },",
+							"            \"responseExpected\": true,",
+							"            \"expectedLength\": 50",
+							"        },",
+							"        {",
+							"            \"description\": \"[LIMIT] - returns the whole list of pokemons when limit is set to 0\",",
+							"            \"code\": 200,",
+							"            \"params\": {",
+							"                limit: 0",
+							"            },",
+							"            \"responseExpected\": true,",
+							"            \"expectedLength\": 151",
+							"        },",
+							"        {",
+							"            \"description\": \"[LIMIT] - returns BAD_REQUEST (400) when the filter value is lower than allowed\",",
+							"            \"code\": 400,",
+							"            \"params\": {",
+							"                limit: -1",
+							"            }",
+							"        },",
+							"        {",
+							"            \"description\": \"[LIMIT] - returns BAD_REQUEST (400) when the filter value is not valid\",",
+							"            \"code\": 400,",
+							"            \"params\": {",
+							"                limit: \"Test\"",
+							"            }",
+							"        },",
+							"        {",
+							"            \"description\": \"[NAME] - returns the required pokemon by its name\",",
+							"            \"code\": 200,",
+							"            \"params\": {",
+							"                \"name\": selectedPokemonName.toLowerCase()",
+							"            },",
+							"            \"responseExpected\": true,",
+							"            \"expectedResults\": [",
+							"                {",
+							"                    \"name\": selectedPokemonName",
+							"                }",
+							"            ]",
+							"        },",
+							"        {",
+							"            \"description\": \"[NAME] - returns an empty array when we ask for a not persisted pokemon\",",
+							"            \"code\": 200,",
+							"            \"params\": {",
+							"                \"name\": pm.globals.get(\"testingNonPersistedPokemonName\")",
+							"            },",
+							"            \"responseExpected\": true,",
+							"            \"expectedLength\": 0",
+							"        },",
+							"        {",
+							"            \"description\": \"[NAME] - returns BAD_REQUEST (400) when the pokemon name has not allowed character\",",
+							"            \"code\": 400,",
+							"            \"params\": {",
+							"                \"name\": selectedPokemonName.substring(2).concat(\"12\")",
+							"            }",
+							"        },",
+							"        {",
+							"            \"description\": \"[TYPE] - returns the required pokemons by its type\",",
+							"            \"code\": 200,",
+							"            \"params\": {",
+							"                \"type\": selectedPokemonType",
+							"            },",
+							"            \"responseExpected\": true,",
+							"            \"expectedLength\": 14",
+							"        },",
+							"        {",
+							"            \"description\": \"[TYPE] - returns an empty array when ask for a not persisted type\",",
+							"            \"code\": 200,",
+							"            \"params\": {",
+							"                \"type\": pm.globals.get(\"testingNonPersistedPokemonType\")",
+							"            },",
+							"            \"responseExpected\": true,",
+							"            \"expectedLength\": 0",
+							"        },",
+							"        {",
+							"            \"description\": \"[TYPE] - returns BAD_REQUEST (400) when the pokemon type has not allowed character\",",
+							"            \"code\": 400,",
+							"            \"params\": {",
+							"                \"type\": selectedPokemonType.substring(2).concat(\"12\")",
+							"            }",
+							"        },",
+							"        {",
+							"            \"description\": \"[PAGINATION] - returns the required pokemons in the defined range\",",
+							"            \"code\": 200,",
+							"            \"params\": {",
+							"                \"page\": 2,",
+							"                \"limit\": 10",
+							"            },",
+							"            \"responseExpected\": true,",
+							"            \"expectedLength\": 10,",
+							"            \"reducedExpectedValues\": {",
+							"                \"key\": \"id\",",
+							"                \"value\": [\"011\", \"012\", \"013\", \"014\", \"015\", \"016\", \"017\", \"018\", \"019\", \"020\"]",
+							"            }",
+							"        },",
+							"        {",
+							"            \"description\": \"[PAGINATION] - returns an empty array when the parameters are out of range\",",
+							"            \"code\": 200,",
+							"            \"params\": {",
+							"                \"page\": 1000,",
+							"                \"limit\": 10",
+							"            },",
+							"            \"responseExpected\": true,",
+							"            \"expectedLength\": 0",
+							"        },",
+							"        {",
+							"            \"description\": \"[PAGINATION] - returns BAD_REQUEST (400) when the page parameter has not allowed value\",",
+							"            \"code\": 400,",
+							"            \"params\": {",
+							"                \"page\": -10,",
+							"                \"limit\": 10",
+							"            }",
+							"        },",
+							"        {",
+							"            \"description\": \"[PAGINATION] - returns BAD_REQUEST (400) when the page parameter has not allowed characters\",",
+							"            \"code\": 400,",
+							"            \"params\": {",
+							"                \"page\": \"AB\",",
+							"                \"limit\": 10",
+							"            }",
+							"        },",
+							"        {",
+							"            \"description\": \"[FAVORITE] - returns the pokemons marked as favorite\",",
+							"            \"code\": 200,",
+							"            \"params\": {",
+							"                \"favorite\": true",
+							"            },",
+							"            \"responseExpected\": true,",
+							"            \"expectedLength\": 1,",
+							"            \"expectedResults\": [",
+							"                {",
+							"                    \"name\": selectedPokemonName",
+							"                }",
+							"            ]",
+							"        },",
+							"        {",
+							"            \"description\": \"[FAVORITE] - returns the whole pokemons, limited by default, when favorite is false, independently whether they are markes as favorite or not\",",
+							"            \"code\": 200,",
+							"            \"params\": {",
+							"                \"favorite\": false",
+							"            },",
+							"            \"responseExpected\": true,",
+							"            \"expectedLength\": defaultLimit",
+							"        },",
+							"        {",
+							"            \"description\": \"[FAVORITE] - returns BAD_REQUEST (400) when the favorite parameter has not allowed characters\",",
+							"            \"code\": 400,",
+							"            \"params\": {",
+							"                \"favorite\": \"AB\"",
+							"            }",
+							"        },",
+							"    ];",
+							"}",
+							"",
+							"const currentTest = testingCases.shift();",
+							"",
+							"const queryParams = Object.entries(currentTest.params).reduce((result, [key, value], index) => {",
+							"    return result.concat(`${index === 0 ? '?' : '&'}${key}=${value}`)",
+							"}, '');",
+							"",
+							"pm.globals.set(\"queryParams\", queryParams);",
+							"pm.globals.set(\"testPayload\", currentTest);",
+							"pm.globals.set(\"testingCases\", testingCases);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{domain}}{{pokemons}}{{queryParams}}",
+					"host": [
+						"{{domain}}{{pokemons}}{{queryParams}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "mark as favorite",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const selectedPokemonId = \"004\";",
+							"",
+							"let testingCases = pm.globals.get(\"testingCases\");",
+							"",
+							"if (!testingCases || testingCases.length === 0) {",
+							"    testingCases = [",
+							"        {",
+							"            \"description\": \"marks the selected pokemon as favorite\",",
+							"            \"code\": 204,",
+							"            \"envVariables\": {",
+							"                \"pokemonId\": selectedPokemonId",
+							"            }",
+							"        },",
+							"        {",
+							"            \"description\": \"returns BAD_REQUEST (400) when the pokemon id is longer that allowed\",",
+							"            \"code\": 400,",
+							"            \"envVariables\": {",
+							"                \"pokemonId\": selectedPokemonId.concat(\"234\")",
+							"            }",
+							"        },",
+							"        {",
+							"            \"description\": \"returns BAD_REQUEST (400) when the pokemon id is shorter that allowed\",",
+							"            \"code\": 400,",
+							"            \"envVariables\": {",
+							"                \"pokemonId\": selectedPokemonId.substring(1)",
+							"            }",
+							"        },",
+							"        {",
+							"            \"description\": \"returns BAD_REQUEST (400) when the pokemon id has not allowed character\",",
+							"            \"code\": 400,",
+							"            \"envVariables\": {",
+							"                \"pokemonId\": selectedPokemonId.substring(2).concat('AB')",
+							"            }",
+							"        },",
+							"        {",
+							"            \"description\": \"returns NOT_FOUND (404) when we ask for a not persisted pokemon\",",
+							"            \"code\": 404,",
+							"            \"envVariables\": {",
+							"                \"pokemonId\": pm.globals.get(\"testingNonPersistedPokemonId\")",
+							"            }",
+							"        }",
+							"    ];",
+							"}",
+							"",
+							"const currentTest = testingCases.shift();",
+							"",
+							"pm.globals.set(\"testPayload\", currentTest);",
+							"pm.globals.set(\"testingCases\", testingCases);",
+							"",
+							"Object.entries(currentTest.envVariables).forEach(([key, value]) => pm.globals.set(key, value));"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const testingCases = pm.globals.get(\"testingCases\");",
+							"const testPayload = pm.globals.get(\"testPayload\");",
+							"",
+							"pm.test(testPayload.description, function () {",
+							"    pm.response.to.have.status(testPayload.code);",
+							"});",
+							"",
+							"if (testingCases && testingCases.length > 0) {",
+							"    postman.setNextRequest(\"mark as favorite\");",
+							"} else {",
+							"    postman.setNextRequest(\"filtering\");",
+							"}",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{domain}}{{pokemons}}/markAsFavorite/:id",
+					"host": [
+						"{{domain}}{{pokemons}}"
+					],
+					"path": [
+						"markAsFavorite",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "{{pokemonId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "unmark as favorite",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const selectedPokemonId = \"004\";",
+							"",
+							"let testingCases = pm.globals.get(\"testingCases\");",
+							"",
+							"if (!testingCases || testingCases.length === 0) {",
+							"    testingCases = [",
+							"        {",
+							"            \"description\": \"marks the selected pokemon as favorite\",",
+							"            \"code\": 204,",
+							"            \"envVariables\": {",
+							"                \"pokemonId\": selectedPokemonId",
+							"            }",
+							"        },",
+							"        {",
+							"            \"description\": \"returns BAD_REQUEST (400) when the pokemon id is longer that allowed\",",
+							"            \"code\": 400,",
+							"            \"envVariables\": {",
+							"                \"pokemonId\": selectedPokemonId.concat(\"234\")",
+							"            }",
+							"        },",
+							"        {",
+							"            \"description\": \"returns BAD_REQUEST (400) when the pokemon id is shorter that allowed\",",
+							"            \"code\": 400,",
+							"            \"envVariables\": {",
+							"                \"pokemonId\": selectedPokemonId.substring(1)",
+							"            }",
+							"        },",
+							"        {",
+							"            \"description\": \"returns BAD_REQUEST (400) when the pokemon id has not allowed character\",",
+							"            \"code\": 400,",
+							"            \"envVariables\": {",
+							"                \"pokemonId\": selectedPokemonId.substring(2).concat('AB')",
+							"            }",
+							"        },",
+							"        {",
+							"            \"description\": \"returns NOT_FOUND (404) when we ask for a not persisted pokemon\",",
+							"            \"code\": 404,",
+							"            \"envVariables\": {",
+							"                \"pokemonId\": pm.globals.get(\"testingNonPersistedPokemonId\")",
+							"            }",
+							"        }",
+							"    ];",
+							"}",
+							"",
+							"const currentTest = testingCases.shift();",
+							"",
+							"pm.globals.set(\"testPayload\", currentTest);",
+							"pm.globals.set(\"testingCases\", testingCases);",
+							"",
+							"Object.entries(currentTest.envVariables).forEach(([key, value]) => pm.globals.set(key, value));"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const testingCases = pm.globals.get(\"testingCases\");",
+							"const testPayload = pm.globals.get(\"testPayload\");",
+							"",
+							"pm.test(testPayload.description, function () {",
+							"    pm.response.to.have.status(testPayload.code);",
+							"});",
+							"",
+							"if (testingCases && testingCases.length > 0) {",
+							"    postman.setNextRequest(\"unmark as favorite\");",
+							"} else {",
+							"    postman.setNextRequest(null);",
+							"}",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{domain}}{{pokemons}}/unmarkAsFavorite/:id",
+					"host": [
+						"{{domain}}{{pokemons}}"
+					],
+					"path": [
+						"unmarkAsFavorite",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "{{pokemonId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "expectedPokemonId",
+			"value": ""
+		}
+	]
+}

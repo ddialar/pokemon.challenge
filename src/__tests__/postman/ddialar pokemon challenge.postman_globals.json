@@ -1,0 +1,49 @@
+{
+	"id": "cb619514-6d90-4866-8357-b13d1443c1c7",
+	"values": [
+		{
+			"key": "pokemonId",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "pokemonName",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "queryParams",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "testPayload",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "testingCases",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "testingNonPersistedPokemonName",
+			"value": "TestingPokemonName",
+			"enabled": true
+		},
+		{
+			"key": "testingNonPersistedPokemonId",
+			"value": "999",
+			"enabled": true
+		},
+		{
+			"key": "testingNonPersistedPokemonType",
+			"value": "TestingPokemonType",
+			"enabled": true
+		}
+	],
+	"name": "ddialar pokemon challenge Globals",
+	"_postman_variable_scope": "globals",
+	"_postman_exported_at": "2021-03-17T17:50:19.730Z",
+	"_postman_exported_using": "Postman/8.0.7"
+}

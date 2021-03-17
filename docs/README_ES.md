@@ -30,6 +30,7 @@
   - [Arreglar y aplicar estilos al código](https://github.com/ddialar/pokemon.challenge/blob/master/docs/README_ES.md#commands-lint)
   - [Otros comandos útiles](https://github.com/ddialar/pokemon.challenge/blob/master/docs/README_ES.md#commands-other)
 - [Documentación de la API REST](https://github.com/ddialar/pokemon.challenge/blob/master/docs/README_ES.md#apidoc)
+- [Notas finales](https://github.com/ddialar/pokemon.challenge#final-notes)
 
 ## <a id="description"></a>🔍 Descripción
 
@@ -301,3 +302,22 @@ npm run openapi-spec
 `http://127.0.0.1:3000/explorer/`
 
 El puerto de acceso debe ser definido en las variables de entorno. Echa un vistazo a la sección [**variables de entorno**](https://github.com/ddialar/pokemon.challenge/blob/master/docs/README_ES.md#repository-overview-environment-variables) section.
+
+## <a id="final-notes"></a>🔍 Notas finales
+
+Mientras se ejecuta la aplicación, en la consola aparecen algunos mensajes que no pertenece al código. Esto mensajes son los siguientes:
+
+```
+Top-level use of w, wtimeout, j, and fsync is deprecated. Use writeConcern instead.
+```
+
+```
+(node:1800) Warning: Accessing non-existent property 'MongoError' of module exports inside circular dependency
+```
+
+Ambos están generados por errors sin solventar del divre para MongoDB. Estos errores será arreglados en futuras versiones.
+
+Información adicional:
+
+- [Foro oficial de MongoDB](https://developer.mongodb.com/community/forums/t/warning-accessing-non-existent-property-mongoerror-of-module-exports-inside-circular-dependency/15411/6)
+- [Hilo en StackOverflow](https://stackoverflow.com/a/66376829)

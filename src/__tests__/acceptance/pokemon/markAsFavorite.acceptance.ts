@@ -60,7 +60,7 @@ describe('[CONTROLLERS] - Pokemon - /pokemons/markAsFavorite/{id}', () => {
       .then();
   });
 
-  it('returns NOT_FOUND (404) when a not persisted id is provided', async () => {
+  it('returns NOT_FOUND (404) when we ask for a not persisted pokemon', async () => {
     const pokemonId = testingNonPersistedPokemonId;
     await client
       .put(`/pokemons/markAsFavorite/${pokemonId}`)

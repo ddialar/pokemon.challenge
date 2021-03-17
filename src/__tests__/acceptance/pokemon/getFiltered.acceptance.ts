@@ -86,7 +86,7 @@ describe('[CONTROLLERS] - Pokemon - /pokemons', () => {
         });
     });
 
-    it('returns an empty array when a not persisted name is provided', async () => {
+    it('returns an empty array when we ask for a not persisted prokemon', async () => {
       const name = testingNonPersistedPokemonName;
       await client
         .get(`/pokemons?name=${name}`)
@@ -119,7 +119,7 @@ describe('[CONTROLLERS] - Pokemon - /pokemons', () => {
         });
     });
 
-    it('returns an empty array when a not persisted type is provided', async () => {
+    it('returns an empty array when ask for a not persisted type', async () => {
       const type = testingNonPersistedPokemonType;
       await client
         .get(`/pokemons?type=${type}`)

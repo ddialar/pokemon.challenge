@@ -38,6 +38,7 @@
     "rebuild": "npm run clean && npm run build",
     "prestart": "npm run rebuild",
     "start": "npm run dev_infra:up && DOTENV_CONFIG_PATH=./env/.env.development node -r dotenv/config -r source-map-support/register .",
+    "start:postman": "npm run postman_infra:up && DOTENV_CONFIG_PATH=./env/.postman.env node -r dotenv/config -r source-map-support/register . && npm run postman_infra:down",
     "clean": "lb-clean dist *.tsbuildinfo .eslintcache",
     "deps": "npm run deps:audit && npm run deps:sec-scan",
     "deps:audit": "npm audit && npm outdated",
@@ -46,6 +47,8 @@
     "dev_infra:down": "docker-compose --env-file docker/dev/.docker.env -f docker/docker-compose.yml down -v",
     "test_infra:up": "docker-compose --env-file docker/test/.docker.env -f docker/docker-compose.yml up -d",
     "test_infra:down": "docker-compose --env-file docker/test/.docker.env -f docker/docker-compose.yml down -v",
+    "postman_infra:up": "docker-compose --env-file docker/postman/.docker.env -f docker/docker-compose.yml up -d",
+    "postman_infra:down": "docker-compose --env-file docker/postman/.docker.env -f docker/docker-compose.yml down -v",
     "prepare": "husky install"
   },
   "repository": {

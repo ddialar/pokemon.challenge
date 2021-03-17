@@ -291,7 +291,19 @@ npm run lint:fix
 
 ### <a id="commands-other"></a>🧰 Otros comandos útiles
 
-Generate OpenAPI spec into a file.
+Dado que parar la aplciación desde los modos de `development` o `postman` no detiene los contenedores específicamente creados para ellas, es necesario pararlos manualmente.
+
+En estos casos, para detener el contenedor de cada entorno específico, los comandos que se deben ejecutar son estos:
+
+```sh
+npm run dev_infra:down
+npm run test_infra:down
+npm run postman_infra:down
+```
+
+Todos ellos detienen el contenedor, lo eliminan y borran el volumen de Docker asociado.
+
+Generara la documentación de OpenAPI en un archivo.
 
 ```sh
 npm run openapi-spec

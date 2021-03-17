@@ -21,7 +21,7 @@ export const loggerMiddleware: Middleware = async (middlewareCtx, next) => {
     throw err;
   } finally {
     console.log(
-      `[INFO] Request ${request.method} ${request.url} completed in ${Date.now() - requestTime}ms`,
+      `[INFO ] Request ${request.method} ${request.url} completed in ${Date.now() - requestTime}ms`,
     );
   }
 };

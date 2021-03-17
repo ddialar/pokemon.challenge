@@ -10,9 +10,7 @@ export async function main(options: ApplicationConfig = {}) {
   await app.start();
 
   const url = app.restServer.url;
-  // REFACTOR Replace this log for a specific logger suite
   console.log(`Server is running at ${url}`);
-  console.log(`Try ${url}/ping`);
 
   return app;
 }

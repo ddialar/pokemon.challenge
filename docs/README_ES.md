@@ -30,7 +30,7 @@
   - [Arreglar y aplicar estilos al código](https://github.com/ddialar/pokemon.challenge/blob/master/docs/README_ES.md#commands-lint)
   - [Otros comandos útiles](https://github.com/ddialar/pokemon.challenge/blob/master/docs/README_ES.md#commands-other)
 - [Documentación de la API REST](https://github.com/ddialar/pokemon.challenge/blob/master/docs/README_ES.md#apidoc)
-- [Notas finales](https://github.com/ddialar/pokemon.challenge#final-notes)
+- [Notas finales](https://github.com/ddialar/pokemon.challenge/blob/master/docs/README_ES.md#final-notes)
 
 ## <a id="description"></a>🔍 Descripción
 
@@ -63,7 +63,7 @@ Además este repositorio está diseñado para trabajar con `NodeJS 14.15.0 LTS`.
 
 Si estás ejecutando versiones diferentes de NodeJS en tu sistema, simplemente ejecuta `nvm use` y éste se cambiará a la versión indicada en el archivo `.nvmrc`.
 
-## <a id="requirements"></a>💻 System requirements
+## <a id="requirements"></a>💻 Requisitos del sistema
 
 Para ejecutar el código en su sistema, necesitas tener cubiertos los siguientes requisitos mínimos:
 

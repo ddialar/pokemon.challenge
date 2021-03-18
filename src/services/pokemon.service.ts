@@ -108,7 +108,7 @@ export class PokemonService {
         throw new Error('PokemonNotFound')
       }
 
-      await this.pokemonRepository.markAsFavorite(retrievedPokemon);
+      await this.pokemonRepository.markFavorite(retrievedPokemon, true);
     } catch (error) {
       throw error.message.match('PokemonNotFound')
         ? new HttpErrors.NotFound(`Pokemon with id '${id}' is not registered`,)
@@ -126,7 +126,7 @@ export class PokemonService {
         throw new Error('PokemonNotFound')
       }
 
-      await this.pokemonRepository.unmarkAsFavorite(retrievedPokemon);
+      await this.pokemonRepository.markFavorite(retrievedPokemon, false);
     } catch (error) {
       throw error.message.match('PokemonNotFound')
         ? new HttpErrors.NotFound(`Pokemon with id '${id}' is not registered`,)

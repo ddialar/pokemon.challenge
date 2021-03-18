@@ -206,6 +206,8 @@ El segundo está satisfecho en este caso, por la configuración de diferentes co
 
 Todos los entornos están configurados para ser ejecutados independientemente así que podemos tenerlos todos levantados al mismo tiempo.
 
+Finalmente, toda la aplicación está implementada de manera que cualquier propiedad configurable está definida a través de variables de entorno. de este modo, para cambiar su comportamiento más básico, por ejemplo la ubicación de la base de datos o la URL de arranque de la aplicación, sólo es necesario actualizar el archivo específico de variables de entorno y reiniciar la aplicación.
+
 ## <a id="commands"></a>🔥 Commands guide
 
 ### <a id="commands-switch-node"></a>✅ Cambiando la versión de NodeJS
@@ -259,25 +261,19 @@ Open `http://127.0.0.1:3000` in your browser.
 
 ### <a id="commands-pro-mode"></a>🚀 Compilación de la aplicación
 
-**Required files:**
-
-- `env/.env`
-
-```sh
-npm run build:pro
-```
-
-To incrementally build the project:
+Compilación incremental del proyecto:
 
 ```sh
 npm run build
 ```
 
-To force a full build by cleaning up cached artifacts:
+Para forzar una compilación completa limpiando la caché de componentes:
 
 ```sh
 npm run rebuild
 ```
+
+En este caso no será necesario tener ningún archivo de entorno antes de compilar la aplicación. Sin embargo, este archivo sí será necesario proporcionarlo en el proceso de ejecución de la aplicación.
 
 ### <a id="commands-lint"></a>🩹 Arreglar y aplicar estilos al código
 
@@ -285,7 +281,7 @@ npm run rebuild
 npm run lint
 ```
 
-To automatically fix such issues:
+Para arreglar posibles errores:
 
 ```sh
 npm run lint:fix

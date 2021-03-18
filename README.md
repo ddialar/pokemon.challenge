@@ -1,8 +1,10 @@
+![Header banner](https://github.com/ddialar/pokemon.challenge/blob/master/docs/img/headerBanner.png)
+
 # Pokemon Challenge
 
 <img src="https://img.shields.io/badge/Version-1.0.0-yellow" /> <img src="https://img.shields.io/badge/Loopback-4-blue" /> <img src="https://img.shields.io/badge/TypeScript-4.1.3-blue" /> <img src="https://img.shields.io/badge/openApi-4.1.5-green" /> <img src="https://img.shields.io/badge/Docker-20.10.2-blue" />
 
-[🇪🇸 Version](https://github.com/ddialar/pokemon.challenge/blob/master/README.md/blob/master/docs/README_ES.md)
+[🇪🇸 Version](https://github.com/ddialar/pokemon.challenge/blob/master/docs/README_ES.md)
 
 ## 📖 Index
 

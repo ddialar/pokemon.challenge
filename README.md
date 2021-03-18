@@ -206,7 +206,7 @@ The second one is satisfied in this case by the configuration of different Docke
 
 The whole environments are configured in order to be run independently so we can have both up at the same time.
 
-Finally, the whole application is implemented in the way any configurable property is defined through environment variables. This way, in order to change the its most basic behaviors such as the database location or the starting-up URL, it's only needed to update the specific envitonment variables file and restart the application.
+Finally, the whole application is implemented in the way any configurable property is defined through environment variables. This way, in order to change its most basic behaviors such as the database location or the starting-up URL, it's only needed to update the specific envitonment variables file and restart the application.
 
 ## <a id="commands"></a>🔥 Commands guide
 

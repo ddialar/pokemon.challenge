@@ -63,11 +63,7 @@ export class PokemonRepository extends DefaultCrudRepository<
     return this.find(filter);
   }
 
-  async markAsFavorite(pokemon: Pokemon): Promise<void> {
-    await this.update(new Pokemon({...pokemon, favorite: true}));
-  }
-
-  async unmarkAsFavorite(pokemon: Pokemon): Promise<void> {
-    await this.update(new Pokemon({...pokemon, favorite: false}));
+  async markFavorite(pokemon: Pokemon, isFavorite: boolean): Promise<void> {
+    await this.update(new Pokemon({...pokemon, favorite: isFavorite}));
   }
 }

@@ -33,6 +33,7 @@
   - [Otros comandos útiles](https://github.com/ddialar/pokemon.challenge/blob/master/docs/README_ES.md#commands-other)
 - [Documentación de la API REST](https://github.com/ddialar/pokemon.challenge/blob/master/docs/README_ES.md#apidoc)
 - [Notas finales](https://github.com/ddialar/pokemon.challenge/blob/master/docs/README_ES.md#final-notes)
+- [Deuda técnica](https://github.com/ddialar/pokemon.challenge/blob/master/docs/README_ES.md#tech-debt)
 
 ## <a id="description"></a>🔍 Descripción
 
@@ -333,3 +334,7 @@ Información adicional:
 
 - [Foro oficial de MongoDB](https://developer.mongodb.com/community/forums/t/warning-accessing-non-existent-property-mongoerror-of-module-exports-inside-circular-dependency/15411/6)
 - [Hilo en StackOverflow](https://stackoverflow.com/a/66376829)
+
+## <a id="tech-debt"></a>🤔 Deuda técnica
+
+Por favor, comprueba el archivo [TECH-DEBT](https://github.com/ddialar/pokemon.challenge/blob/master/TECH-DEBT.md) del repositorio para estar al día de este tema.

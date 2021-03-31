@@ -2,13 +2,11 @@
 
 ## Index
 
-- [Direct Pokemon entity modification on favorite mutation](https://github.com/ddialar/pokemon.challenge/blob/master/TECH-DEBT.md#direct-entity-modification)
-- [Strong coupling with the persistance model definition](https://github.com/ddialar/pokemon.challenge/blob/master/TECH-DEBT.md#persistance-model-coupling)
-- [Improve the reported errors to the client application](https://github.com/ddialar/pokemon.challenge/blob/master/TECH-DEBT.md#errors-enhancement)
-- [Improve the API security configuring sensitive headers](https://github.com/ddialar/pokemon.challenge/blob/master/TECH-DEBT.md#implement-helmet)
-- [Improve the API security implementing some kind of rate limiter](https://github.com/ddialar/pokemon.challenge/blob/master/TECH-DEBT.md#implement-rate-limiter)
-
-## <a id="description"></a>
+- [Direct Pokemon entity modification on favorite mutation](https://github.com/ddialar/pokemon.challenge/blob/docs/post-release/TECH-DEBT.md#direct-entity-modification)
+- [Strong coupling with the persistance model definition](https://github.com/ddialar/pokemon.challenge/blob/docs/post-release/TECH-DEBT.md#persistance-model-coupling)
+- [Improve the reported errors to the client application](https://github.com/ddialar/pokemon.challenge/blob/docs/post-release/TECH-DEBT.md#errors-enhancement)
+- [Improve the API security configuring sensitive headers](https://github.com/ddialar/pokemon.challenge/blob/docs/post-release/TECH-DEBT.md#implement-helmet)
+- [Improve the API security implementing some kind of rate limiter](https://github.com/ddialar/pokemon.challenge/blob/docs/post-release/TECH-DEBT.md#implement-rate-limiter)
 
 ## <a id="direct-entity-modification"></a> ➡️ Direct Pokemon entity modification on favorite mutation
 

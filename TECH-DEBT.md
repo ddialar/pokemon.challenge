@@ -8,7 +8,9 @@
 - [Improve the API security configuring sensitive headers](https://github.com/ddialar/pokemon.challenge/blob/master/TECH-DEBT.md#implement-helmet)
 - [Improve the API security implementing some kind of rate limiter](https://github.com/ddialar/pokemon.challenge/blob/master/TECH-DEBT.md#implement-rate-limiter)
 
-## <a id="direct-entity-modification"></a>➡️ Direct Pokemon entity modification on favorite mutation
+## <a id="description"></a>
+
+## <a id="direct-entity-modification"></a> ➡️ Direct Pokemon entity modification on favorite mutation
 
 ### Problem
 
@@ -48,7 +50,7 @@ In the absence of being able to confirm these requirements, to proceed with its 
 
 There are no additional notes.
 
-## <a id="persistance-model-coupling"></a>➡️ Strong coupling with the persistance model definition
+## <a id="persistance-model-coupling"></a> ➡️ Strong coupling with the persistance model definition
 
 ### Problem
 
@@ -83,7 +85,7 @@ Due to the required information by the possible cliente application uses the sam
 
 There are no additional notes.
 
-## <a id="errors-enhancement"></a>➡️ Improve the reported errors to the client application
+## <a id="errors-enhancement"></a> ➡️ Improve the reported errors to the client application
 
 ### Problem
 
@@ -121,7 +123,7 @@ There were no specifications about how to handle this kind of errors.
 
 There are no additional notes.
 
-## <a id="implement-helmet"></a>➡️ Improve the API security configuring sensitive headers
+## <a id="implement-helmet"></a> ➡️ Improve the API security configuring sensitive headers
 
 ### Problem
 
@@ -154,7 +156,7 @@ To resolve this point requires additional researching time that was now avaible 
 
 There are no additional notes.
 
-## <a id="implement-rate-limiter"></a>➡️ Improve the API security implementing some kind of rate limiter
+## <a id="implement-rate-limiter"></a> ➡️ Improve the API security implementing some kind of rate limiter
 
 ### Problem
 
